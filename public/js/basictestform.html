@@ -10,38 +10,47 @@
 <body>
 
 
-<label for="userid">userid</label>
-<input type="text" id="userid">
+<label for="UserId">UserId</label>
+<input type="text" id="UserId">
 <label for="product">productid</label>
-<input type="text" id="productid">
+<input type="text" id="productId">
 <label for="testform">message</label>
-<textarea rows="10" id="testform"></textarea>	
+<textarea rows="3" id="testform"></textarea>	
 <button type="submit" id="submit" >submit review</button>
 <br>
-<label for="username"></label>
+<br>
+<br>
+<br>
+<label for="username">username</label>
 <input type="text" id="username">
-<label for="password"></label>
+<label for="password">password</label>
 <input type="text" id="password">
-<label for="email"></label>
+<label for="email">email</label>
 <input type="text" id="email">
-<button type="submit" id="submit2" >make user</button>
-
+<button type="submit" id="submit2">make user</button>
+<br>
+<br>
+<br>
+<br>
 <label for="name">product name</label>
 <input type="text" id="name">
-<label for="manufacturer"></label>
+<label for="manufacturer">manufacturer</label>
 <input type="text" id="manufacturer">
-<label for="userIdForProduct">userid</label>
-<input type="text" id="userIdForProduct">
-<textarea rows="10" id="productDescription"></textarea>	
+<label for="UserIdForProduct">UserId</label>
+<input type="text" id="UserIdForProduct">
+<label for="productDescription">product Description</label>
+<textarea rows="3" id="productDescription"></textarea>	
 <button type="submit" id="submit3" >make product</button>
 
 <script>
 	
 $("#submit").on("click",function(){
 	var messageBody = $("#testform").val();
-	var userId = $("#userId").val();
-	var productId = $("#productid").val();
-	var review = {messageBody,userId,productId};
+	var UserId = $("#UserId").val();
+	var ProductId = $("#productId").val();
+	var review = {messageBody,UserId,ProductId};
+	console.log("review below");
+	console.log(review);
 	$.post("/api/reviewpost", review, function(post) {
 		console.log(post);
     });
@@ -58,10 +67,10 @@ $("#submit2").on("click",function(){
 $("#submit3").on("click",function(){
 	var name = $("#name").val();
 	var manufacturer = $("#manufacturer").val();
-	var userId = $("#userIdForProduct").val();
+	var UserId = $("#UserIdForProduct").val();
 	var productDescription = $("#productDescription").val();
-	var review = {name,manufacturer,userId,productDescription};
-	$.post("/api/productpost", review, function(post) {
+	var product = {name,manufacturer,UserId,productDescription};
+	$.post("/api/productpost", product, function(post) {
 		console.log(post);
     });
 });

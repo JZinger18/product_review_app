@@ -14,6 +14,21 @@ module.exports = function(sequelize, DataTypes)
 
   });
 
+  Review.associate = function(models){
+
+  Review.belongsTo(models.Product, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+  Review.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+      });
+};
+
   return Review;
 
 };

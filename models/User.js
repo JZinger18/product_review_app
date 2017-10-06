@@ -30,18 +30,17 @@ module.exports = function(sequelize, DataTypes)
     User.associate = function(models) {
 
     User.hasMany(models.Review, {
-      as: "ReviewUserId",
       foreignKey: {
         allowNull: false
       }
     });
 
     User.hasMany(models.Product, {
-      as: "ProductUserId",
       foreignKey: {
         allowNull: false
       }
     });
+    
   };
 
   return User;

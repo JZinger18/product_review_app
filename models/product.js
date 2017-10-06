@@ -24,13 +24,18 @@ module.exports = function(sequelize, DataTypes)
 
   Product.associate = function(models) {
 
-    Product.hasMany(models.Review, {
-      as:"ReviewProductId",
+    Product.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
       }
     });
-    
+
+    Product.hasMany(models.Review, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
   };
 
   return Product;

@@ -74,6 +74,8 @@ app.post("/api/reviewPost", function(req, res) {
     console.log(req.body);
     db.Review.create({
       messageBody:req.body.messageBody,
+      userId:req.body.userId,
+      productId: req.body.productId
     })
     .then(function(dbReview) {
       res.json(dbReview);
@@ -83,29 +85,20 @@ app.post("/api/reviewPost", function(req, res) {
 app.post("/api/productpost", function(req, res) {
     console.log(req.body);
     db.Product.create({
+
       productDescription:req.body.productDescription,
+
       name:req.body.name,
-      manufacturer:req.body.manufacturer     
+
+      manufacturer:req.body.manufacturer
+
     })
     .then(function(dbReview) {
+
       res.json(dbReview);
+
     });
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   };
 

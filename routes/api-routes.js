@@ -12,8 +12,8 @@ var db = require("../models");
 // =============================================================
 module.exports = function(app) {
 
-/*  // GET route for getting all of the Reviews
-  app.get("/api/Reviews/", function(req, res) {
+  // GET route for getting all of the Reviews
+  app.get("/api/getAllReviews", function(req, res) {
     db.Review.findAll({})
     .then(function(dbReview) {
       res.json(dbReview);
@@ -21,7 +21,7 @@ module.exports = function(app) {
   });
 
   // Get route for returning Reviews of a specific category
-  app.get("/api/Reviews/category/:category", function(req, res) {
+/*  app.get("/api/Reviews/category/:category", function(req, res) {
     db.Review.findAll({
       where: {
         category: req.params.category
@@ -30,10 +30,10 @@ module.exports = function(app) {
     .then(function(dbReview) {
       res.json(dbReview);
     });
-  });
+  });*/
 
   // Get rotue for retrieving a single Review
-  app.get("/api/Reviews/:id", function(req, res) {
+ /* app.get("/api/Reviews/:id", function(req, res) {
     db.Review.findOne({
       where: {
         id: req.params.id
@@ -42,7 +42,7 @@ module.exports = function(app) {
     .then(function(dbReview) {
       res.json(dbReview);
     });
-  });
+  });*/
 
   // Review route for saving a new Review
   app.post("/api/Reviews", function(req, res) {
@@ -56,7 +56,7 @@ module.exports = function(app) {
       res.json(dbReview);
     });
   });
-*/
+
     app.post("/api/userpost", function(req, res) {
     console.log(req.body);
     db.User.create({

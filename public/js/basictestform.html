@@ -21,6 +21,7 @@
 <br>
 <br>
 <br>
+<br>
 <label for="username">username</label>
 <input type="text" id="username">
 <label for="password">password</label>
@@ -28,6 +29,7 @@
 <label for="email">email</label>
 <input type="text" id="email">
 <button type="submit" id="submit2">make user</button>
+<br>
 <br>
 <br>
 <br>
@@ -41,6 +43,11 @@
 <label for="productDescription">product Description</label>
 <textarea rows="3" id="productDescription"></textarea>	
 <button type="submit" id="submit3" >make product</button>
+<br><br><br><br>
+
+<label for="name">product name</label>
+<input type="text" id="nameOfProductBeingSearched">
+<button type="submit" id="submit4" >find products</button>
 
 <script>
 	
@@ -72,6 +79,13 @@ $("#submit3").on("click",function(){
 	var product = {name,manufacturer,UserId,productDescription};
 	$.post("/api/productpost", product, function(post) {
 		console.log(post);
+    });
+});
+
+$("#submit4").on("click",function(){
+	var name = $("#nameOfProductBeingSearched").val();
+	$.get("/api/getAllReviews/"+name, function(products) {
+		console.log(products);
     });
 });
 

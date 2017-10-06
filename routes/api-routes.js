@@ -13,8 +13,20 @@ var db = require("../models");
 module.exports = function(app) {
 
   // GET route for getting all of the Reviews
-  app.get("/api/getAllReviews", function(req, res) {
-    db.Review.findAll({})
+  app.get("/api/getAllReviews/:name?", function(req, res) {
+   console.log(req.params.name);
+
+    db.Product.findAndCountAll({
+      limit: 12,
+      offset: 0,
+      where:{name:req.params.name}
+    /*    attributes: {
+         include: ['']  
+       },*/
+/*      include:[
+        {association:db.Product.associate}
+      ]*/
+  })
     .then(function(dbReview) {
       res.json(dbReview);
     });

@@ -85,13 +85,9 @@ app.post("/api/reviewPost", function(req, res) {
 app.post("/api/productpost", function(req, res) {
     console.log(req.body);
     db.Product.create({
-
       productDescription:req.body.productDescription,
-
       name:req.body.name,
-
       manufacturer:req.body.manufacturer
-
     })
     .then(function(dbReview) {
 

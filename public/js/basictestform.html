@@ -26,8 +26,8 @@
 <input type="text" id="email">
 <button type="submit" id="submit2" >make user</button>
 
-<label for="productName">product name</label>
-<input type="text" id="productName">
+<label for="name">product name</label>
+<input type="text" id="name">
 <label for="manufacturer"></label>
 <input type="text" id="manufacturer">
 <label for="userIdForProduct">userid</label>
@@ -39,10 +39,29 @@
 	
 $("#submit").on("click",function(){
 	var messageBody = $("#testform").val();
-	var 
-	$("#testform").val('');
-	var review = {messageBody};
+	var userId = $("#userId").val();
+	var productId = $("#productid").val();
+	var review = {messageBody,userId,productId};
 	$.post("/api/reviewpost", review, function(post) {
+		console.log(post);
+    });
+});
+$("#submit2").on("click",function(){
+	var username = $("#username").val();
+	var password = $("#password").val();
+	var email = $("#email").val(); 
+	var user = {username,password,email};
+	$.post("/api/userpost", user, function(post) {
+		console.log(post);
+    });
+});
+$("#submit3").on("click",function(){
+	var name = $("#name").val();
+	var manufacturer = $("#manufacturer").val();
+	var userId = $("#userIdForProduct").val();
+	var productDescription = $("#productDescription").val();
+	var review = {name,manufacturer,userId,productDescription};
+	$.post("/api/productpost", review, function(post) {
 		console.log(post);
     });
 });

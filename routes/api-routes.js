@@ -57,16 +57,55 @@ module.exports = function(app) {
     });
   });
 */
-    app.post("/api/testpost", function(req, res) {
+    app.post("/api/userpost", function(req, res) {
     console.log(req.body);
-    db.Review.create({
-      messageBody:req.body.messageBody,
-      userId: 1,
+    db.User.create({
+      username:req.body.username,
+      password:req.body.password,
+      email:req.body.email
     })
     .then(function(dbReview) {
       res.json(dbReview);
     });
   });
+
+
+app.post("/api/reviewPost", function(req, res) {
+    console.log(req.body);
+    db.Review.create({
+      messageBody:req.body.messageBody,
+    })
+    .then(function(dbReview) {
+      res.json(dbReview);
+    });
+  });
+
+app.post("/api/productpost", function(req, res) {
+    console.log(req.body);
+    db.Product.create({
+      productDescription:req.body.productDescription,
+      name:req.body.name,
+      manufacturer:req.body.manufacturer     
+    })
+    .then(function(dbReview) {
+      res.json(dbReview);
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   };
 

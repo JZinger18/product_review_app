@@ -42,7 +42,7 @@ $("#submit").on("click",function(){
 	var 
 	$("#testform").val('');
 	var review = {messageBody};
-	$.post("/api/testpost", review, function(post) {
+	$.post("/api/reviewpost", review, function(post) {
 		console.log(post);
     });
 });

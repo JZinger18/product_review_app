@@ -115,16 +115,17 @@ app.post("/api/productpost", function(req, res) {
         id: req.params.id
       }
     })
-    .then(function(dbReview) {
-      res.json(dbReview);
+    .then(function(amountOfRowsAffected) {
+      res.end(amountOfRowsAffected.toString());
     });
   });
 
-};
 
-/*
+
+
   // PUT route for updating Reviews
-  app.put("/api/Reviews", function(req, res) {
+  app.put("/api/Reviewupdate", function(req, res) {
+
     db.Review.update(req.body,
       {
         where: {
@@ -132,6 +133,10 @@ app.post("/api/productpost", function(req, res) {
         }
       })
     .then(function(dbReview) {
+
       res.json(dbReview);
+
     });
-  });*/
+  });
+
+};

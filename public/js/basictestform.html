@@ -44,7 +44,6 @@
 <textarea rows="3" id="productDescription"></textarea>	
 <button type="submit" id="submit3" >make product</button>
 <br><br><br><br>
-
 <label for="name">product name</label>
 <input type="text" id="nameOfProductBeingSearched">
 <button type="submit" id="submit4" >find products</button>
@@ -52,7 +51,12 @@
 <label for="deleteInput">review Id</label>
 <input type="text" id="deleteInput">
 <button type="submit" id="submit5" >delete review</button>
-
+<br><br><br><br>
+<label for="ReviewId">ReviewId</label>
+<input type="text" id="ReviewId">
+<label for="messageBody">messageBody</label>
+<textarea rows="3" id="messageBody"></textarea>	
+<button type="submit" id="submit6" >submit review</button>
 <script>
 	
 $("#submit").on("click",function(){
@@ -95,6 +99,7 @@ $("#submit4").on("click",function(){
 
 $("#submit5").on("click",function(){
 	var id = $("#deleteInput").val();
+	$("#deleteInput").val('');
 	$.ajax({
       method: "DELETE",
       url: "/api/Reviews/"+id
@@ -104,6 +109,32 @@ $("#submit5").on("click",function(){
 		console.log(products);
     });
 });
+
+$("#submit6").on("click",function(){
+	var messageBody = $("#messageBody").val();
+	var id = $("#ReviewId").val();
+	var review = {messageBody,id};
+	$.ajax({
+      method: "PUT",
+      url: "/api/Reviewupdate",
+      data: review
+    })
+    .done(function(post) {
+		console.log(post);
+    });
+});
+
+
+
+
+/*    $.ajax({
+      method: "PUT",
+      url: "/api/posts",
+      data: post
+    })
+    .done(function() {
+      window.location.href = "/blog";
+    });*/
 
 /*
   function deletePost(id) {

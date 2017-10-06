@@ -19,13 +19,11 @@ module.exports = function(app) {
     db.Product.findAndCountAll({
       limit: 12,
       offset: 0,
-      where:{name:req.params.name}
-    /*    attributes: {
-         include: ['']  
-       },*/
-/*      include:[
-        {association:db.Product.associate}
-      ]*/
+      where:{name:req.params.name},
+        attributes: {
+         exclude: ['createdAt']  
+       },
+      include:[{model:db.User,attributes:{exclude: ['createdAt']}},{model:db.Review,attributes:{exclude: ['createdAt']}}]
   })
     .then(function(dbReview) {
       res.json(dbReview);

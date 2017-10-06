@@ -105,7 +105,7 @@ app.post("/api/productpost", function(req, res) {
     });
   });
 
-  };
+
 
   // DELETE route for deleting Reviews
   app.delete("/api/Reviews/:id", function(req, res) {
@@ -119,7 +119,9 @@ app.post("/api/productpost", function(req, res) {
       res.json(dbReview);
     });
   });
-  
+
+};
+
 /*
   // PUT route for updating Reviews
   app.put("/api/Reviews", function(req, res) {

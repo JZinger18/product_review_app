@@ -107,8 +107,9 @@ app.post("/api/productpost", function(req, res) {
 
   };
 
-/*  // DELETE route for deleting Reviews
+  // DELETE route for deleting Reviews
   app.delete("/api/Reviews/:id", function(req, res) {
+
     db.Review.destroy({
       where: {
         id: req.params.id
@@ -118,7 +119,8 @@ app.post("/api/productpost", function(req, res) {
       res.json(dbReview);
     });
   });
-
+  
+/*
   // PUT route for updating Reviews
   app.put("/api/Reviews", function(req, res) {
     db.Review.update(req.body,
@@ -130,5 +132,4 @@ app.post("/api/productpost", function(req, res) {
     .then(function(dbReview) {
       res.json(dbReview);
     });
-  });
-};*/
+  });*/

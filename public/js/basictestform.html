@@ -48,6 +48,10 @@
 <label for="name">product name</label>
 <input type="text" id="nameOfProductBeingSearched">
 <button type="submit" id="submit4" >find products</button>
+<br><br><br><br>
+<label for="deleteInput">review Id</label>
+<input type="text" id="deleteInput">
+<button type="submit" id="submit5" >delete review</button>
 
 <script>
 	
@@ -88,6 +92,29 @@ $("#submit4").on("click",function(){
 		console.log(products);
     });
 });
+
+$("#submit5").on("click",function(){
+	var id = $("#deleteInput").val();
+	$.ajax({
+      method: "DELETE",
+      url: "/api/Reviews/"+id
+    })
+    .done(function(products) 
+	{
+		console.log(products);
+    });
+});
+
+/*
+  function deletePost(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/posts/" + id
+    })
+    .done(function() {
+      getPosts(postCategorySelect.val());
+    });
+  }*/
 
 </script>
 </body>

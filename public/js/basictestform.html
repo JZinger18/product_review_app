@@ -1,0 +1,31 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<label for="testform"></label>
+<textarea rows="10" id="testform"></textarea>	
+<button type="submit" id="submit" >submit papo</button>
+<br>
+<input type="text" id="username">
+
+<script>
+	
+$("#submit").on("click",function(){
+	var messageBody = $("#testform").val();
+	$("#testform").val('');
+	var Post = {messageBody};
+	$.post("/api/testpost", Post, function(post) {
+		console.log(post);
+    });
+});
+
+</script>
+</body>
+</html>

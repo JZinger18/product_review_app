@@ -8,7 +8,8 @@ module.exports = function(sequelize, DataTypes)
       allowNull: false,
       validate: {
       len:[1,30]
-      }
+      },
+      unique:true
     },
     password:{
       type: DataTypes.TEXT,
@@ -23,7 +24,8 @@ module.exports = function(sequelize, DataTypes)
       validate:{
         is: /^[^@]+@[^@]+.[^@]{3,6}$/i,
         len: [1,50]
-      }
+      },
+      unique:true
     }
   });
 

@@ -57,7 +57,13 @@
 <label for="messageBody">messageBody</label>
 <textarea rows="3" id="messageBody"></textarea>	
 <button type="submit" id="submit6" >submit review</button>
+
+
+<br><br><br><br>
+<a href="/auth/facebook">Login with Facebook</a>
 <script>
+
+
 	
 $("#submit").on("click",function(){
 	var messageBody = $("#testform").val();
@@ -91,7 +97,9 @@ $("#submit3").on("click",function(){
 });
 
 $("#submit4").on("click",function(){
+	var limit = 12//someFunction that determines the limit;
 	var name = $("#nameOfProductBeingSearched").val();
+	name += "?"+limit;
 	$.get("/api/getAllReviews/"+name, function(products) {
 		console.log(products);
     });
@@ -123,8 +131,6 @@ $("#submit6").on("click",function(){
 		console.log(post);
     });
 });
-
-
 
 
 /*    $.ajax({

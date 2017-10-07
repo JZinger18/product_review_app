@@ -9,6 +9,32 @@
 </head>
 <body>
 
+<div id="fb-root"></div>
+
+<script>
+	(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.10&appId=1662728243761233";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+	
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+</script>
+
+<div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true">
+<fb:login-button 
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button>
+</div>
+
+
 
 <label for="UserId">UserId</label>
 <input type="text" id="UserId">
@@ -41,7 +67,9 @@
 <label for="UserIdForProduct">UserId</label>
 <input type="text" id="UserIdForProduct">
 <label for="productDescription">product Description</label>
-<textarea rows="3" id="productDescription"></textarea>	
+<textarea rows="3" id="productDescription"></textarea>
+<label for="id">id</label>
+<input type="text" id="id">	
 <button type="submit" id="submit3" >make product</button>
 <br><br><br><br>
 <label for="name">product name</label>
@@ -57,13 +85,42 @@
 <label for="messageBody">messageBody</label>
 <textarea rows="3" id="messageBody"></textarea>	
 <button type="submit" id="submit6" >submit review</button>
+<br><br>
+
+<label for="channelName">channel Search</label>
+<input type="text" id="channelName">	
+<button type="submit" id="submit7" >submit channel search</button>
 
 
 <br><br><br><br>
-<a href="/auth/facebook">Login with Facebook</a>
 <script>
 
+/*
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{latest-api-version}'
+    });
+    FB.AppEvents.logPageView();   
+  };
 
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+
+
+FB.login()
+*/
 	
 $("#submit").on("click",function(){
 	var messageBody = $("#testform").val();
@@ -129,6 +186,13 @@ $("#submit6").on("click",function(){
     })
     .done(function(post) {
 		console.log(post);
+    });
+});
+
+$("#submit7").on("click",function(){
+	var channelName = $("#channelName").val();
+	$.get("/api/channelsearch/"+channelName, function(channels) {
+		console.log(channels);
     });
 });
 

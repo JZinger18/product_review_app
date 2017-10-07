@@ -6,8 +6,14 @@
 // =============================================================
 
 // Requiring our Todo model
-var db = require("../models");
+var db = require('../models');
 var Sequelize = require('sequelize');
+var YouTube = require('youtube-node');
+var wholeObject;
+var youTube = new YouTube();
+youTube.setKey('AIzaSyAwef6wBJ9KUllwk0ab6ynzOKzrYutkaoM');
+
+
 
 
 // Routes
@@ -43,16 +49,44 @@ module.exports = function(app) {
   });*/
 
   // Get rotue for retrieving a single Review
- /* app.get("/api/Reviews/:id", function(req, res) {
-    db.Review.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-    .then(function(dbReview) {
-      res.json(dbReview);
-    });
-  });*/
+
+
+
+
+
+
+
+
+
+
+  app.get("/api/channelsearch/:name?", function(req, res) {
+
+    youTube.search(req.params.name, 10,{type:'channel'}, function(error, result) {
+  if (error) {
+    console.log(error);
+  }
+  else {
+    console.log(result);
+    var response = result.items.map(
+
+      function (channelresultsValues)
+         {
+          let id = channelresultsValues["id"]["channelId"];
+          let title = channelresultsValues["snippet"]["title"];
+          let description = channelresultsValues["snippet"]["description"];
+          let url = channelresultsValues["snippet"]["thumbnails"]["default"]["url"];
+          return {id,title,description,url};
+         }
+
+         );
+
+      res.json(response);
+  }
+
+});
+
+
+  });
 
   // Review route for saving a new Review
 /*  app.post("/api/Reviews", function(req, res) {
@@ -94,11 +128,13 @@ app.post("/api/reviewpost", function(req, res) {
   });
 
 app.post("/api/productpost", function(req, res) {
+
     db.Product.create({
       productDescription:req.body.productDescription,
       name:req.body.name,
       manufacturer:req.body.manufacturer,
-      UserId:req.body.UserId
+      UserId:req.body.UserId,
+      id: req.body.id
     })
     .then(function(dbReview) {
       res.json(dbReview);

@@ -7,6 +7,8 @@
 
 // Requiring our Todo model
 var db = require("../models");
+var Sequelize = require('sequelize');
+
 
 // Routes
 // =============================================================
@@ -94,12 +96,11 @@ app.post("/api/reviewpost", function(req, res) {
   });
 
 app.post("/api/productpost", function(req, res) {
-    console.log(req.body);
     db.Product.create({
       productDescription:req.body.productDescription,
       name:req.body.name,
       manufacturer:req.body.manufacturer,
-      UserId:req.body.Userid
+      UserId:req.body.UserId
     })
     .then(function(dbReview) {
       res.json(dbReview);

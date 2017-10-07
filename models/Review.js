@@ -9,8 +9,27 @@ module.exports = function(sequelize, DataTypes)
       allowNull: false,
       validate: {
       len:[250,1000]
-      }
+      } 
+    },
+    id:{
+      type:DataTypes.INTEGER,
+      allowNull:false,
+      set(val){
+        return this.setDataValue("id",Number(String(this.getDataValue("ProductId"))+this.getDataValue("UserId")))
+      },
+      primaryKey:true
     }
+
+    /*,
+    ProductId:{
+      primaryKey:true
+
+
+    },
+    UserId:{
+      primaryKey:true
+
+    }*/
 
   });
 

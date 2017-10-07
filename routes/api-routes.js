@@ -55,7 +55,7 @@ module.exports = function(app) {
   });*/
 
   // Review route for saving a new Review
-  app.post("/api/Reviews", function(req, res) {
+/*  app.post("/api/Reviews", function(req, res) {
     console.log(req.body);
     db.Review.create({
       title: req.body.title,
@@ -65,7 +65,7 @@ module.exports = function(app) {
     .then(function(dbReview) {
       res.json(dbReview);
     });
-  });
+  });*/
 
     app.post("/api/userpost", function(req, res) {
     console.log(req.body);
@@ -85,7 +85,8 @@ app.post("/api/reviewpost", function(req, res) {
     db.Review.create({
       messageBody:req.body.messageBody,
       UserId:req.body.UserId,
-      ProductId : req.body.ProductId
+      ProductId : req.body.ProductId,
+      id:1
     })
     .then(function(dbReview) {
       res.json(dbReview);

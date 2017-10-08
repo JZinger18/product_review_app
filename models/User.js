@@ -26,7 +26,12 @@ module.exports = function(sequelize, DataTypes)
         len: [1,50]
       },
       unique:true
-    }
+    },
+      status: {
+      type: DataTypes.ENUM('active', 'inactive'),
+      defaultValue: 'active'
+        }
+
   });
 
     User.associate = function(models) {

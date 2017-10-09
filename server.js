@@ -3,13 +3,9 @@ var db = require("./models");
 var express = require("express");
 var app = express();
 var passport   = require('passport');
-var session    = require('express-session');
 var bodyParser = require('body-parser');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var bodyParser = require("body-parser");
-var env = require('dotenv').load();
 var exphbs = require('express-handlebars');
-var bCrypt = require('bcrypt-nodejs');
+
 
 
 
@@ -28,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-var exphbs = require("express-handlebars");
+
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

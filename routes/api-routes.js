@@ -21,7 +21,7 @@ youTube.setKey('AIzaSyAwef6wBJ9KUllwk0ab6ynzOKzrYutkaoM');
 module.exports = function(app) {
 
   // GET route for getting all of the Reviews
-  app.get("/api/getAllReviews/:name?", function(req, res) {
+  app.get("/api/getAllProducts/:name", function(req, res) {
     db.Product.findAndCountAll({
       limit: req.query.limit,
       offset: 0,
@@ -34,6 +34,20 @@ module.exports = function(app) {
     .then(function(dbReview) {
       res.json(dbReview);
     });
+  });
+
+    app.get("/api/getOneProduct/:name", function(req, res) {
+      db.Product.findOne({
+        where:{
+      name:req.params.name
+       },
+       attributes:{
+        exclude:['manufacturer','createdAt']
+       }
+     })
+    .then(function(dbReview) {
+      res.json(dbReview);
+    })
   });
 
   // Get route for returning Reviews of a specific category

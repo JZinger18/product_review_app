@@ -93,6 +93,10 @@ function checkLoginState() {
 
 
 <br><br><br><br>
+<label for="nameOfProductBeingSearched2">product name find one</label>
+<input type="text" id="nameOfProductBeingSearched2">
+<button type="submit" id="submit8" >find products</button>
+<br><br><br><br>
 
 <form action="/login" method="post">
     <div>
@@ -107,7 +111,6 @@ function checkLoginState() {
         <input type="submit" value="Log In"/>
     </div>
 </form>
-
 <script>
 
 /*
@@ -172,7 +175,7 @@ $("#submit4").on("click",function(){
 	var limit = 12//someFunction that determines the limit;
 	var name = $("#nameOfProductBeingSearched").val();
 	name += "?"+limit;
-	$.get("/api/getAllReviews/"+name, function(products) {
+	$.get("/api/getAllProducts/"+name, function(products) {
 		console.log(products);
     });
 });
@@ -208,6 +211,13 @@ $("#submit7").on("click",function(){
 	var channelName = $("#channelName").val();
 	$.get("/api/channelsearch/"+channelName, function(channels) {
 		console.log(channels);
+    });
+});
+
+$("#submit8").on("click",function(){
+  var name = $("#nameOfProductBeingSearched2").val();
+  $.get("/api/getOneProduct/"+name, function(products) {
+    console.log(products);
     });
 });
 

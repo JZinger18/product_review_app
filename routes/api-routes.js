@@ -94,7 +94,7 @@ module.exports = function(app) {
 
          );
 
-      res.json(response);
+      res.json({response,result});
   }
 
 });

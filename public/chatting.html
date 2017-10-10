@@ -47,13 +47,12 @@ function checkLoginState() {
 
  -->
 
-<label for="UserId">UserId</label>
-<input type="text" id="UserId">
-<label for="product">productid</label>
-<input type="text" id="productId">
-<label for="testform">message</label>
-<textarea rows="3" id="testform"></textarea>	
-<button type="submit" id="submit" >submit review</button>
+
+<label for="MessageUserId">message user</label>
+<input type="text" id="messageUserId">
+<label for="message">message</label>
+<textarea rows="3" id="message"></textarea>	
+<button type="submit" id="submit" >submit message</button>
 <br>
 <br>
 <br>
@@ -66,62 +65,9 @@ function checkLoginState() {
 <label for="email">email</label>
 <input type="text" id="email">
 <button type="submit" id="submit2">make user</button>
-<br>
-<br>
-<br>
-<br>
-<br>
-<label for="name">product name</label>
-<input type="text" id="name">
-<label for="manufacturer">manufacturer</label>
-<input type="text" id="manufacturer">
-<label for="UserIdForProduct">UserId</label>
-<input type="text" id="UserIdForProduct">
-<label for="productDescription">product Description</label>
-<textarea rows="3" id="productDescription"></textarea>
-<label for="id">id</label>
-<input type="text" id="id">	
-<button type="submit" id="submit3" >make product</button>
-<br><br><br><br>
-<label for="name">product name</label>
-<input type="text" id="nameOfProductBeingSearched">
-<button type="submit" id="submit4" >find products</button>
-<br><br><br><br>
-<label for="deleteInput">review Id</label>
-<input type="text" id="deleteInput">
-<button type="submit" id="submit5" >delete review</button>
-<br><br><br><br>
-<label for="ReviewId">ReviewId</label>
-<input type="text" id="ReviewId">
-<label for="messageBody">messageBody</label>
-<textarea rows="3" id="messageBody"></textarea>	
-<button type="submit" id="submit6" >submit review</button>
-<br><br>
-
-<label for="channelName">channel Search</label>
-<input type="text" id="channelName">	
-<button type="submit" id="submit7" >submit channel search</button>
-
-
-<br><br><br><br>
-<label for="nameOfProductBeingSearched2">product name find one</label>
-<input type="text" id="nameOfProductBeingSearched2">
-<button type="submit" id="submit8" >find products</button>
-<br><br><br><br>
-
-<form action="/login" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" name="username"/>
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="Log In"/>
-    </div>
-</form>
+<div id = "messageHolder">
+  
+</div>
 <script>
 
 /*
@@ -152,16 +98,28 @@ FB.login()
 */
 	
 $("#submit").on("click",function(){
-	var messageBody = $("#testform").val();
-	var UserId = $("#UserId").val();
-	var ProductId = $("#productId").val();
-	var review = {messageBody,UserId,ProductId};
-	console.log("review below");
-	console.log(review);
-	$.post("/api/reviewpost", review, function(post) {
-		console.log(post);
-    });
+	var messageBody = $("#message").val();
+	var messageTitle = $("#messageTitle").val();
+	var messageUserId = $("#messageUserId").val();
+  var InfoToAppend = $("<div>").html(`
+  <span>${messageUserId}:</span><br>
+  <p>${messageBody}</p>
+  `);
+  $("#messageHolder").append(InfoToAppend);
+  socket.emit("message-from-client-chat",{
+    user:messageUserId,
+    message:messageBody
+  });
 });
+
+socket.on("updateChat",function(message){
+  $("#messageHolder").append(
+    $("<div>").html(`
+  <span>${message.user}:</span><br>
+  <p>${message.message}</p>
+  `)
+    );
+})
 $("#submit2").on("click",function(){
 	var username = $("#username").val();
 	var password = $("#password").val();
@@ -232,26 +190,6 @@ $("#submit8").on("click",function(){
     });
 });
 
-
-/*    $.ajax({
-      method: "PUT",
-      url: "/api/posts",
-      data: post
-    })
-    .done(function() {
-      window.location.href = "/blog";
-    });*/
-
-/*
-  function deletePost(id) {
-    $.ajax({
-      method: "DELETE",
-      url: "/api/posts/" + id
-    })
-    .done(function() {
-      getPosts(postCategorySelect.val());
-    });
-  }*/
 
 </script>
 </body>

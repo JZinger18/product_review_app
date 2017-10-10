@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
 </head>
 <body>
 
@@ -25,6 +28,83 @@ function checkLoginState() {
     statusChangeCallback(response);
   });
 }
+</script>
+
+
+<script>
+  var config = {
+  apiKey: "AIzaSyAvOeLPMADwYKvRC8-JLKGZbpIxY-hObgc",
+  authDomain: "date-night-e35f7.firebaseapp.com",
+  databaseURL: "https://date-night-e35f7.firebaseio.com",
+  projectId: "date-night-e35f7",
+  storageBucket: "date-night-e35f7.appspot.com",
+  messagingSenderId: "156260956808"
+};
+firebase.initializeApp(config);
+
+// FirebaseUI config.
+var uiConfig = {
+  signInSuccessUrl: 'index2.html',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  ],
+  // Terms of service url.
+  tosUrl: '<your-tos-url>'
+};
+
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+// The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);
+
+initApp = function() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    // console.log(user.val())
+    if (user) {
+      // User is signed in.
+
+      var displayName = user.displayName;
+      var email = user.email;
+      var emailVerified = user.emailVerified;
+      var photoURL = user.photoURL;
+      var uid = user.uid;
+      var phoneNumber = user.phoneNumber;
+      var providerData = user.providerData;
+      console.log(uid)
+      console.log(user.displayName)
+      // user.getIdToken().then(function(accessToken) {
+      //   document.getElementById('sign-in-status').textContent = 'Signed in';
+      //   document.getElementById('sign-in').textContent = 'Sign out';
+      //   document.getElementById('account-details').textContent = JSON.stringify({
+      //     displayName: displayName,
+      //     email: email,
+      //     emailVerified: emailVerified,
+      //     phoneNumber: phoneNumber,
+      //     photoURL: photoURL,
+      //     uid: uid,
+      //     accessToken: accessToken,
+      //     providerData: providerData
+      //   }, null, '  ');
+      // });
+     }
+    // else {
+    //   // User is signed out.
+    //   document.getElementById('sign-in-status').textContent = 'Signed out';
+    //   document.getElementById('sign-in').textContent = 'Sign in';
+    //   document.getElementById('account-details').textContent = 'null';
+    // }
+  }, function(error) {
+    console.log(error);
+  });
+};
+
+$(document).ready(function() {
+    initApp()
+
+
+})
 </script>
 
 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true">
@@ -111,7 +191,17 @@ function checkLoginState() {
         <input type="submit" value="Log In"/>
     </div>
 </form>
+
+
+//firebase ui
+<div id="firebaseui-auth-container"></div>
+
+
 <script>
+
+
+
+
 
 /*
   window.fbAsyncInit = function() {
@@ -139,6 +229,10 @@ function checkLoginState() {
 
 FB.login()
 */
+
+
+
+
 	
 $("#submit").on("click",function(){
 	var messageBody = $("#testform").val();

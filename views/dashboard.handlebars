@@ -109,12 +109,17 @@
 
 	    		<div class="cards">
 
-	    			<div class="container">
+	    		<div class="container">
 	        			<div class="title">
 	    				    <h3>5 Star Channels</h3>
 	        			</div></br>
 
-	    				<div class="row">
+
+
+					{{#each channels}}
+						{{> cards/card}}
+					{{/each}}
+<!-- 	    				<div class="row">
 	    					<div class="col-md-4">
 	    						<div class="card card-profile">
 	    							<div class="card-avatar">
@@ -279,7 +284,8 @@
 	    						</div>
 	    					</div>
 
-	    				</div>	    				<div class="row">
+	    				</div>	    				
+	    				<div class="row">
 	    					<div class="col-md-4">
 	    						<div class="card card-profile">
 	    							<div class="card-avatar">
@@ -360,7 +366,8 @@
 	    						</div>
 	    					</div>
 
-	    				</div>	    				<div class="row">
+	    				</div>	    				
+	    				<div class="row">
 	    					<div class="col-md-4">
 	    						<div class="card card-profile">
 	    							<div class="card-avatar">
@@ -439,10 +446,10 @@
 	    								<a href="#" class="btn btn-danger btn-default"><i class="material-icons">add </i>Review</a>
 	    							</div>
 	    						</div>
-	    					</div>
+	    					</div> -->
 
 	    				</div>
-	    			</div>
+	    		</div>
 
 	    		</div>
 	    		<!--     *********    END CARDS      *********      -->

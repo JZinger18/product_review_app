@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes)
       allowNull: false,
       validate: 
         {
-        len:[250,1000]
+        len:[20,1000]
         } 
       },
     rating: 

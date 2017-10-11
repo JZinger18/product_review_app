@@ -1,16 +1,16 @@
-     var db = require("./models");
+     var db = require("../models");
 
 
      module.exports = function(app)
      {
 
-      app.get("/addtestValues",function(req,res){
+      app.get("/adduserValues",function(req,res){
 
      db.User.create({
       username:"andrewwilliams",
       password:"abc11abc22",
       email:"andrewjameswilliams.aw@gmail.com"
-    });
+    })
      db.User.create({
       username:"testUser1",
       password:"abc11abc22",
@@ -31,15 +31,18 @@
       password:"abc11abc22",
       email:"testuser4@gmail.com"
     });
+      res.redirect("/testing");
+        });
+    app.get("/addchannelValues",function(req,res){
      db.Channel.create({
-      channelDescription:"We make comedy videos.",
+      channelDescription:"We make comedy videos",
       name:"h3h3Productions",
       UserId:1,
       category:"comedy",
       thumbnail:"https://yt3.ggpht.com/-QWMKBXNBE2E/AAAAAAAAAAI/AAAAAAAAAAA/rEARmBXfgHw/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
     });
      db.Channel.create({
-      channelDescription:"I make videos.",
+      channelDescription:'I make videos',
       name:"PewDiePie",
       UserId:2,
       category:"gaming",
@@ -59,6 +62,9 @@
       category:"News",
       thumbnail:"https://yt3.ggpht.com/-8EmOV6Uyan8/AAAAAAAAAAI/AAAAAAAAAAA/lsr2usyFUO0/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
     });
+    res.redirect("/testing");
+});
+        app.get("/addreviewValues",function(req,res){
      db.Review.create(
      	{
      	messageBody:"PewDiePie is certainly not the greatest creator on the youtube platform, however, his fame and notoriety are certainly not unwarranted",
@@ -115,8 +121,7 @@
      	rating:1
      	}
      );
-     res.redirect("/testing")
-   });
-
+    res.redirect("/testing");
+  });
 
    }

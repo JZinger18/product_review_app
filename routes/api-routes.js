@@ -7,7 +7,7 @@
 
 // Requiring our Todo model
 var db = require('../models');
-var Sequelize = require('sequelize');
+var Op = require('sequelize').Op;
 var YouTube = require('youtube-node');
 var wholeObject;
 var youTube = new YouTube();
@@ -34,7 +34,9 @@ module.exports = function(app) {
     db.Channel.findAndCountAll({
       limit: req.query.limit,
       offset: 0,
-      where:{name:req.params.name},
+      where:{name:{
+        [Op.like]:"%"+req.params.name+"%"
+      }},
         attributes: {
          exclude: ['createdAt']  
        },

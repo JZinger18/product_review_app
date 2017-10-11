@@ -5,6 +5,8 @@
 // Dependencies
 // =============================================================
 var path = require("path");
+var db = require('../models');
+var Op = require('sequelize').Op;
 
 // Routes
 // =============================================================
@@ -14,7 +16,19 @@ module.exports = function(app) {
 
   // index route loads view.html
   app.get("/", function(req, res) {
-    res.render("dashboard");
+    db.Channel.findAndCountAll({
+      limit: 12,
+      offset: 0,
+      include:[{model:db.User,attributes:{exclude: ['createdAt']}},{model:db.Review,attributes:{exclude: ['createdAt']}}]
+  })
+    .then(function(dbReview) {
+      var channels = dbReview.rows.map(function(x)
+      {
+        var amountOfStars = Math.round(x.Reviews.reduce(function(a,b){return a+Number(b.rating)},0)/x.Reviews.length);
+        return{name:x.name,category:x.category,channelDescription:x.channelDescription,ratingValue:`<i class="fa fa-star"></i>`.repeat(amountOfStars),thumbnail:x.thumbnail}
+      })
+      res.render("dashboard",{channels:channels});
+    });
   });
   app.get("/testing", function(req, res) {
     res.render("testing");

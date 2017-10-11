@@ -6,12 +6,8 @@ module.exports = function(sequelize, DataTypes)
 
     channelDescription: 
       {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      validate: 
-        {
-        len:[1,100]
-        }
+      type: DataTypes.STRING,
+      allowNull: false
       },
     name: 
       {

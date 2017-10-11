@@ -147,12 +147,7 @@ app.post("/api/reviewpost", function(req, res) {
 
 app.post("/api/Channelpost", function(req, res) {
 
-    db.Channel.create({
-      channelDescription:req.body.channelDescription,
-      name:req.body.name,
-      UserId:req.body.UserId,
-      rating: req.body.rating
-    })
+    db.Channel.create(req.body)
     .then(function(dbReview) {
       res.json(dbReview);
     });

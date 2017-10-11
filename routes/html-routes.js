@@ -14,15 +14,12 @@ module.exports = function(app) {
 
   // index route loads view.html
   app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    res.render("dashboard");
+  });
+  app.get("/testing", function(req, res) {
+    res.render("testing");
   });
 
-  app.get("/stephanfile", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/stephanfile.html"));
-  });
-   app.get("/chatting", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/chatting.html"));
-  });
 /*
   // blog route loads blog.html
   app.get("/blog", function(req, res) {

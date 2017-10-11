@@ -4,22 +4,32 @@ module.exports = function(sequelize, DataTypes)
   var Channel = sequelize.define("Channel", 
   {
 
-    channelDescription: {
+    channelDescription: 
+      {
       type: DataTypes.TEXT,
       allowNull: false,
-      validate: {
-      len:[1,100]
-      }
-    },
-      name: {
+      validate: 
+        {
+        len:[1,100]
+        }
+      },
+    name: 
+      {
       type: DataTypes.STRING,
       allowNull: false,
       unique:true
-    },
-      rating: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    }
+      },
+
+    thumbnail:
+      {
+      type: DataTypes.STRING,
+      allowNull:false
+      },
+    category:
+      {
+      type: DataTypes.STRING,
+      allowNull:false
+      }
 
   });
 

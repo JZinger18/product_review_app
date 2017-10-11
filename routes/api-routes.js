@@ -21,8 +21,17 @@ youTube.setKey('AIzaSyAwef6wBJ9KUllwk0ab6ynzOKzrYutkaoM');
 module.exports = function(app) {
 
   // GET route for getting all of the Reviews
-  app.get("/api/getAllProducts/:name", function(req, res) {
-    db.Product.findAndCountAll({
+
+
+  app.post('/cookie',function(req, res){
+      var value = req.body.username;
+     res.cookie("name" , value).redirect("/public/index.html");
+});
+
+
+  app.get("/api/getAllChannels/:name", function(req, res) {
+
+    db.Channel.findAndCountAll({
       limit: req.query.limit,
       offset: 0,
       where:{name:req.params.name},
@@ -36,8 +45,8 @@ module.exports = function(app) {
     });
   });
 
-    app.get("/api/getOneProduct/:name", function(req, res) {
-      db.Product.findOne({
+    app.get("/api/getOneChannel/:name", function(req, res) {
+      db.Channel.findOne({
         where:{
       name:req.params.name
        },
@@ -73,7 +82,7 @@ module.exports = function(app) {
 
 
 
-  app.get("/api/channelsearch/:name?", function(req, res) {
+  app.get("/api/channelearch/:name?", function(req, res) {
 
     youTube.search(req.params.name, 10,{type:'channel'}, function(error, result) {
   if (error) {
@@ -133,7 +142,7 @@ app.post("/api/reviewpost", function(req, res) {
     db.Review.create({
       messageBody:req.body.messageBody,
       UserId:req.body.UserId,
-      ProductId : req.body.ProductId,
+      channelId : req.body.channelId,
       id:1
     })
     .then(function(dbReview) {
@@ -141,10 +150,10 @@ app.post("/api/reviewpost", function(req, res) {
     });
   });
 
-app.post("/api/productpost", function(req, res) {
+app.post("/api/Channelpost", function(req, res) {
 
-    db.Product.create({
-      productDescription:req.body.productDescription,
+    db.Channel.create({
+      channelDescription:req.body.channelDescription,
       name:req.body.name,
       manufacturer:req.body.manufacturer,
       UserId:req.body.UserId,

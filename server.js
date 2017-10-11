@@ -34,6 +34,8 @@ app.set("view engine", "handlebars");
 
 // Static directory
 app.use(express.static(path.join(__dirname,"public")));
+var users = [];
+
 
 io.on('connection',function(socket){
 	console.log('new connection has been made');
@@ -46,10 +48,12 @@ io.on('connection',function(socket){
 	});
 	socket.on("message-from-client-chat",function(message){
 		console.log(message);
-		socket.broadcast.emit("updateChat",message);
+		users.push(message.user);
+		socket.broadcast.emit("updateChat",{message,users});
 	});
 	
 })
+
 
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);

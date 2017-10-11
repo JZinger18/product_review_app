@@ -49,8 +49,8 @@ function checkLoginState() {
 
 <label for="UserId">UserId</label>
 <input type="text" id="UserId">
-<label for="product">productid</label>
-<input type="text" id="productId">
+<label for="Channel">Channelid</label>
+<input type="text" id="ChannelId">
 <label for="testform">message</label>
 <textarea rows="3" id="testform"></textarea>	
 <button type="submit" id="submit" >submit review</button>
@@ -71,21 +71,21 @@ function checkLoginState() {
 <br>
 <br>
 <br>
-<label for="name">product name</label>
+<label for="name">Channel name</label>
 <input type="text" id="name">
 <label for="manufacturer">manufacturer</label>
 <input type="text" id="manufacturer">
-<label for="UserIdForProduct">UserId</label>
-<input type="text" id="UserIdForProduct">
-<label for="productDescription">product Description</label>
-<textarea rows="3" id="productDescription"></textarea>
+<label for="UserIdForChannel">UserId</label>
+<input type="text" id="UserIdForChannel">
+<label for="ChannelDescription">Channel Description</label>
+<textarea rows="3" id="ChannelDescription"></textarea>
 <label for="id">id</label>
 <input type="text" id="id">	
-<button type="submit" id="submit3" >make product</button>
+<button type="submit" id="submit3" >make Channel</button>
 <br><br><br><br>
-<label for="name">product name</label>
-<input type="text" id="nameOfProductBeingSearched">
-<button type="submit" id="submit4" >find products</button>
+<label for="name">Channel name</label>
+<input type="text" id="nameOfChannelBeingSearched">
+<button type="submit" id="submit4" >find Channels</button>
 <br><br><br><br>
 <label for="deleteInput">review Id</label>
 <input type="text" id="deleteInput">
@@ -104,9 +104,9 @@ function checkLoginState() {
 
 
 <br><br><br><br>
-<label for="nameOfProductBeingSearched2">product name find one</label>
-<input type="text" id="nameOfProductBeingSearched2">
-<button type="submit" id="submit8" >find products</button>
+<label for="nameOfChannelBeingSearched2">Channel name find one</label>
+<input type="text" id="nameOfChannelBeingSearched2">
+<button type="submit" id="submit8" >find Channels</button>
 <br><br><br><br>
 
 <form action="/login" method="post">
@@ -154,8 +154,8 @@ FB.login()
 $("#submit").on("click",function(){
 	var messageBody = $("#testform").val();
 	var UserId = $("#UserId").val();
-	var ProductId = $("#productId").val();
-	var review = {messageBody,UserId,ProductId};
+	var channelId = $("#ChannelId").val();
+	var review = {messageBody,UserId,channelId};
 	console.log("review below");
 	console.log(review);
 	$.post("/api/reviewpost", review, function(post) {
@@ -174,20 +174,20 @@ $("#submit2").on("click",function(){
 $("#submit3").on("click",function(){
 	var name = $("#name").val();
 	var manufacturer = $("#manufacturer").val();
-	var UserId = $("#UserIdForProduct").val();
-	var productDescription = $("#productDescription").val();
-	var product = {name,manufacturer,UserId,productDescription};
-	$.post("/api/productpost", product, function(post) {
+	var UserId = $("#UserIdForChannel").val();
+	var channelDescription = $("#ChannelDescription").val();
+	var Channel = {name,manufacturer,UserId,channelDescription};
+	$.post("/api/Channelpost", Channel, function(post) {
 		console.log(post);
     });
 });
 
 $("#submit4").on("click",function(){
 	var limit = 12//someFunction that determines the limit;
-	var name = $("#nameOfProductBeingSearched").val();
+	var name = $("#nameOfChannelBeingSearched").val();
 	name += "?"+limit;
-	$.get("/api/getAllProducts/"+name, function(products) {
-		console.log(products);
+	$.get("/api/getAllChannels/"+name, function(Channels) {
+		console.log(Channels);
     });
 });
 
@@ -198,9 +198,9 @@ $("#submit5").on("click",function(){
       method: "DELETE",
       url: "/api/Reviews/"+id
     })
-    .done(function(products) 
+    .done(function(Channels) 
 	{
-		console.log(products);
+		console.log(Channels);
     });
 });
 
@@ -226,9 +226,9 @@ $("#submit7").on("click",function(){
 });
 
 $("#submit8").on("click",function(){
-  var name = $("#nameOfProductBeingSearched2").val();
-  $.get("/api/getOneProduct/"+name, function(products) {
-    console.log(products);
+  var name = $("#nameOfChannelBeingSearched2").val();
+  $.get("/api/getOneChannel/"+name, function(Channels) {
+    console.log(Channels);
     });
 });
 

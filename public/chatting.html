@@ -65,6 +65,9 @@ function checkLoginState() {
 <label for="email">email</label>
 <input type="text" id="email">
 <button type="submit" id="submit2">make user</button>
+<div id = "onlineUsers">
+  
+</div>
 <div id = "messageHolder">
   
 </div>
@@ -113,10 +116,12 @@ $("#submit").on("click",function(){
 });
 
 socket.on("updateChat",function(message){
+  $("#onlineUsers").append(message.users)
+
   $("#messageHolder").append(
     $("<div>").html(`
-  <span>${message.user}:</span><br>
-  <p>${message.message}</p>
+  <span>${message.message.user}:</span><br>
+  <p>${message.message.message}</p>
   `)
     );
 })

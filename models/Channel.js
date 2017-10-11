@@ -1,10 +1,10 @@
 module.exports = function(sequelize, DataTypes) 
 {
 
-  var Product = sequelize.define("Product", 
+  var Channel = sequelize.define("Channel", 
   {
 
-    productDescription: {
+    channelDescription: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
@@ -13,24 +13,25 @@ module.exports = function(sequelize, DataTypes)
     },
       name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique:true
     },
-      manufacturer: {
-      type: DataTypes.STRING,
+      rating: {
+      type: DataTypes.INTEGER,
       allowNull: false
     }
 
   });
 
-  Product.associate = function(models) {
+  Channel.associate = function(models) {
 
-    Product.belongsTo(models.User, {
+    Channel.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
       }
     });
 
-    Product.hasMany(models.Review, {
+    Channel.hasMany(models.Review, {
       foreignKey: {
         allowNull: false
       }
@@ -38,6 +39,6 @@ module.exports = function(sequelize, DataTypes)
 
   };
 
-  return Product;
+  return Channel;
 
 };

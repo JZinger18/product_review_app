@@ -1,0 +1,221 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+<script>
+  var socket = io('http://localhost:8080');
+  
+socket.on("message-from-server",function(message){
+  console.log(message);
+          var onlineUsers2 = $("<div>");
+        if(message.users.length>1){
+          message.users.forEach(function(x){
+            onlineUsers2.append(`<p>${x}</p>`);
+          })
+        }
+    $("#onlineUsers").html(onlineUsers2);
+    console.log(message);
+  });
+
+  socket.emit("message-from-client",{
+    greeting:'Hello from Client'
+  });
+
+</script>
+<!-- 
+<div id="fb-root"></div>
+
+<script>
+	(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.10&appId=1662728243761233";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+	
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+</script>
+
+<div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true">
+<fb:login-button 
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button>
+</div>
+
+ -->
+
+
+<label for="MessageUserId">message user</label>
+<input type="text" id="messageUserId">
+<label for="message">message</label>
+<textarea rows="3" id="message"></textarea>	
+<button type="submit" id="submit" >submit message</button>
+<br>
+<br>
+<br>
+<br>
+<br>
+<label for="username">username</label>
+<input type="text" id="username">
+<label for="password">password</label>
+<input type="text" id="password">
+<label for="email">email</label>
+<input type="text" id="email">
+<button type="submit" id="submit2">make user</button>
+<h4>online users</h4>
+<div id = "onlineUsers" style = "border-style: solid; border-width: 5px; border-color: blue">
+  
+</div>
+<div id = "messageHolder">
+  
+</div>
+<script>
+
+/*
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{latest-api-version}'
+    });
+    FB.AppEvents.logPageView();   
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+
+
+FB.login()
+*/
+	
+$("#submit").on("click",function(){
+	var messageBody = $("#message").val();
+	var messageTitle = $("#messageTitle").val();
+	var messageUserId = $("#messageUserId").val();
+  var InfoToAppend = $("<div>").html(`
+  <span>${messageUserId}:</span><br>
+  <p>${messageBody}</p>
+  `);
+  $("#messageHolder").append(InfoToAppend);
+  socket.emit("message-from-client-chat",{
+    user:messageUserId,
+    message:messageBody
+  });
+});
+
+socket.on("updateChat",function(message){
+    var onlineUsers = $("<div>");
+    console.log(message);
+    console.log("this is happening");
+      if(message.users.length>1){
+        message.users.forEach(function(x){
+          onlineUsers.append(`<p>${x}</p>`);
+        })
+      }
+  $("#onlineUsers").html(onlineUsers);
+
+  $("#messageHolder").append(
+    $("<div>").html(`
+  <span>${message.message.user}:</span><br>
+  <p>${message.message.message}</p>
+  `)
+    );
+})
+$("#submit2").on("click",function(){
+	var username = $("#username").val();
+	var password = $("#password").val();
+	var email = $("#email").val(); 
+	var user = {username,password,email};
+	$.post("/api/userpost", user, function(post) {
+		console.log(post);
+    });
+});
+$("#submit3").on("click",function(){
+	var name = $("#name").val();
+	var manufacturer = $("#manufacturer").val();
+	var UserId = $("#UserIdForProduct").val();
+	var productDescription = $("#productDescription").val();
+	var product = {name,manufacturer,UserId,productDescription};
+	$.post("/api/productpost", product, function(post) {
+		console.log(post);
+    });
+});
+
+$("#submit4").on("click",function(){
+	var limit = 12//someFunction that determines the limit;
+	var name = $("#nameOfProductBeingSearched").val();
+	name += "?"+limit;
+	$.get("/api/getAllProducts/"+name, function(products) {
+		console.log(products);
+    });
+});
+
+$("#submit5").on("click",function(){
+	var id = $("#deleteInput").val();
+	$("#deleteInput").val('');
+	$.ajax({
+      method: "DELETE",
+      url: "/api/Reviews/"+id
+    })
+    .done(function(products) 
+	{
+		console.log(products);
+    });
+});
+
+$("#submit6").on("click",function(){
+	var messageBody = $("#messageBody").val();
+	var id = $("#ReviewId").val();
+	var review = {messageBody,id};
+	$.ajax({
+      method: "PUT",
+      url: "/api/Reviewupdate",
+      data: review
+    })
+    .done(function(post) {
+		console.log(post);
+    });
+});
+
+$("#submit7").on("click",function(){
+	var channelName = $("#channelName").val();
+	$.get("/api/channelsearch/"+channelName, function(channels) {
+		console.log(channels);
+    });
+});
+
+$("#submit8").on("click",function(){
+  var name = $("#nameOfProductBeingSearched2").val();
+  $.get("/api/getOneProduct/"+name, function(products) {
+    console.log(products);
+    });
+});
+
+
+</script>
+</body>
+</html>

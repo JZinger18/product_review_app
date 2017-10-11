@@ -1,146 +1,234 @@
-<!DOCTYPE html>
-<html lang="en">
 
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
-    <!-- Font Awesome -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
 </head>
-
 <body>
+<script>
+  var socket = io('http://localhost:8080');
+  socket.on("message-from-server",function(message){
+    console.log(message);
+  });
+  socket.emit("message-from-client",{
+    greeting:'Hello from Client'
+  });
+</script>
 
-<!-- Always shows a header, even in smaller screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">Title</span>
-      <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
-      <!-- Navigation. We hide it in small screens. -->
-      <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-      </nav>
+
+<label for="UserId">UserId</label>
+<input type="text" id="UserId">
+<label for="Channel">Channelid</label>
+<input type="text" id="ChannelId">
+<label for="testform">message</label>
+<textarea rows="3" id="testform"></textarea>	
+<button type="submit" id="submit" >submit review</button>
+<br>
+<br>
+<br>
+<br>
+<br>
+<label for="username">username</label>
+<input type="text" id="username">
+<label for="password">password</label>
+<input type="text" id="password">
+<label for="email">email</label>
+<input type="text" id="email">
+<button type="submit" id="submit2">make user</button>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<label for="name">Channel name</label>
+<input type="text" id="name">
+<label for="UserIdForChannel">UserId</label>
+<input type="text" id="UserIdForChannel">
+<label for="ChannelDescription">Channel Description</label>
+<textarea rows="3" id="ChannelDescription"></textarea>
+<label for="ChannelRating">ChannelRating</label>
+<input type="text" id="ChannelRating">
+<button type="submit" id="submit3" >make Channel</button>
+
+<br><br><br><br>
+<label for="name">Channel name</label>
+<input type="text" id="nameOfChannelBeingSearched">
+<button type="submit" id="submit4" >find Channels</button>
+<br><br><br><br>
+<label for="deleteInput">review Id</label>
+<input type="text" id="deleteInput">
+<button type="submit" id="submit5" >delete review</button>
+<br><br><br><br>
+<label for="ReviewId">ReviewId</label>
+<input type="text" id="ReviewId">
+<label for="messageBody">messageBody</label>
+<textarea rows="3" id="messageBody"></textarea>	
+<button type="submit" id="submit6" >submit review</button>
+<br><br>
+
+<label for="channelName">channel Search on api</label>
+<input type="text" id="channelName">	
+<button type="submit" id="submit7" >submit channel search on api</button>
+
+
+<br><br><br><br>
+<label for="nameOfChannelBeingSearched2">Channel name find one</label>
+<input type="text" id="nameOfChannelBeingSearched2">
+<button type="submit" id="submit8" >find Channels</button>
+<br><br><br><br>
+
+<form action="/login" method="post">
+    <div>
+        <label>Username:</label>
+        <input type="text" name="username"/>
     </div>
-  </header>
-  <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Title</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-    </nav>
-  </div>
-  <main class="mdl-layout__content">
-    <div class="page-content"><!-- Your content goes here --></div>
-  </main>
-</div>
-
-<div>
-
-<div class="mdl-grid">
-
-    <div class="mdl-cell mdl-cell--4-col">
-
-    card goes her
-
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password"/>
     </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-
-    card goes her
-
+    <div>
+        <input type="submit" value="Log In"/>
     </div>
+</form>
+<script>
 
-        <div class="mdl-cell mdl-cell--4-col">
+/*
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{latest-api-version}'
+    });
+    FB.AppEvents.logPageView();   
+  };
 
-    card goes her
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 
-    </div>
-  </div>
-</div>
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
 
 
+FB.login()
+*/
+	
+$("#submit").on("click",function(){
+	var messageBody = $("#testform").val();
+	var UserId = $("#UserId").val();
+	var ChannelId = $("#ChannelId").val();
+	var review = {messageBody,UserId,ChannelId};
+	console.log("review below");
+	console.log(review);
+	$.post("/api/reviewpost", review, function(post) {
+		console.log(post);
+    });
+});
+$("#submit2").on("click",function(){
+	var username = $("#username").val();
+	var password = $("#password").val();
+	var email = $("#email").val(); 
+	var user = {username,password,email};
+	$.post("/api/userpost", user, function(post) {
+		console.log(post);
+    });
+});
+$("#submit3").on("click",function(){
+	var name = $("#name").val();
+	var UserId = $("#UserIdForChannel").val();
+  var rating = $("#ChannelRating").val();
+	var channelDescription = $("#ChannelDescription").val();
+	var Channel = {name,UserId,channelDescription,rating};
+	$.post("/api/Channelpost", Channel, function(post) {
+		console.log(post);
+    });
+});
+
+$("#submit4").on("click",function(){
+	var limit = 12//someFunction that determines the limit;
+	var name = $("#nameOfChannelBeingSearched").val();
+	name += "?"+limit;
+	$.get("/api/getAllChannels/"+name, function(Channels) {
+		console.log(Channels);
+    });
+});
+
+$("#submit5").on("click",function(){
+	var id = $("#deleteInput").val();
+	$("#deleteInput").val('');
+	$.ajax({
+      method: "DELETE",
+      url: "/api/Reviews/"+id
+    })
+    .done(function(Channels) 
+	{
+		console.log(Channels);
+    });
+});
+
+$("#submit6").on("click",function(){
+	var messageBody = $("#messageBody").val();
+	var id = $("#ReviewId").val();
+	var review = {messageBody,id};
+	$.ajax({
+      method: "PUT",
+      url: "/api/Reviewupdate",
+      data: review
+    })
+    .done(function(post) {
+		console.log(post);
+    });
+});
+
+$("#submit7").on("click",function(){
+	var channelName = $("#channelName").val();
+	$.get("/api/channelsearch/"+channelName, function(channels) {
+		console.log(channels);
+    });
+});
+
+$("#submit8").on("click",function(){
+  var name = $("#nameOfChannelBeingSearched2").val();
+  $.get("/api/getOneChannel/"+name, function(Channels) {
+    console.log(Channels);
+    });
+});
 
 
-<!-- Footer -->
-<footer class="mdl-mega-footer">
-  <div class="mdl-mega-footer__middle-section">
+/*    $.ajax({
+      method: "PUT",
+      url: "/api/posts",
+      data: post
+    })
+    .done(function() {
+      window.location.href = "/blog";
+    });*/
 
-    <div class="mdl-mega-footer__drop-down-section">
-      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-      <h1 class="mdl-mega-footer__heading">Features</h1>
-      <ul class="mdl-mega-footer__link-list">
-        <li><a href="#">About</a></li>
-        <li><a href="#">Terms</a></li>
-        <li><a href="#">Partners</a></li>
-        <li><a href="#">Updates</a></li>
-      </ul>
-    </div>
+/*
+  function deletePost(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/posts/" + id
+    })
+    .done(function() {
+      getPosts(postCategorySelect.val());
+    });
+  }*/
 
-    <div class="mdl-mega-footer__drop-down-section">
-      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-      <h1 class="mdl-mega-footer__heading">Details</h1>
-      <ul class="mdl-mega-footer__link-list">
-        <li><a href="#">Specs</a></li>
-        <li><a href="#">Tools</a></li>
-        <li><a href="#">Resources</a></li>
-      </ul>
-    </div>
-
-    <div class="mdl-mega-footer__drop-down-section">
-      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-      <h1 class="mdl-mega-footer__heading">Technology</h1>
-      <ul class="mdl-mega-footer__link-list">
-        <li><a href="#">How it works</a></li>
-        <li><a href="#">Patterns</a></li>
-        <li><a href="#">Usage</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Contracts</a></li>
-      </ul>
-    </div>
-
-    <div class="mdl-mega-footer__drop-down-section">
-      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-      <h1 class="mdl-mega-footer__heading">FAQ</h1>
-      <ul class="mdl-mega-footer__link-list">
-        <li><a href="#">Questions</a></li>
-        <li><a href="#">Answers</a></li>
-        <li><a href="#">Contact us</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="mdl-mega-footer__bottom-section">
-    <div class="mdl-logo">Title</div>
-    <ul class="mdl-mega-footer__link-list">
-      <li><a href="#">Help</a></li>
-      <li><a href="#">Privacy & Terms</a></li>
-    </ul>
-  </div>
-
-</footer>
-
-    <!-- SCRIPTS -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-
+</script>
 </body>
-
 </html>
+>>>>>>> andrewtest

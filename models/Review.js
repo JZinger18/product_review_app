@@ -9,14 +9,15 @@ module.exports = function(sequelize, DataTypes)
       allowNull: false,
       validate: {
       len:[250,1000]
-      }
+      } 
     }
+
 
   });
 
   Review.associate = function(models){
 
-  Review.belongsTo(models.Product, {
+  Review.belongsTo(models.Channel, {
       foreignKey: {
         allowNull: false
       }

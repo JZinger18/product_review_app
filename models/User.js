@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes)
       allowNull: false,
       unique:true,
       validate: {
-      len:[1,30]
+      len:[1,50]
       }
     },
     password:{
@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes)
       }
     });
 
-    User.hasMany(models.Product, {
+    User.hasMany(models.Channel, {
       foreignKey: {
         allowNull: false
       }

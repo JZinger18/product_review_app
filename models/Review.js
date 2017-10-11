@@ -10,32 +10,14 @@ module.exports = function(sequelize, DataTypes)
       validate: {
       len:[250,1000]
       } 
-    },
-    id:{
-      type:DataTypes.INTEGER,
-      allowNull:false,
-      set(val){
-        return this.setDataValue("id",Number(String(this.getDataValue("ProductId"))+this.getDataValue("UserId")))
-      },
-      primaryKey:true
     }
 
-    /*,
-    ProductId:{
-      primaryKey:true
-
-
-    },
-    UserId:{
-      primaryKey:true
-
-    }*/
 
   });
 
   Review.associate = function(models){
 
-  Review.belongsTo(models.Product, {
+  Review.belongsTo(models.Channel, {
       foreignKey: {
         allowNull: false
       }

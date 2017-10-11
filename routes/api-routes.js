@@ -82,7 +82,7 @@ module.exports = function(app) {
 
 
 
-  app.get("/api/channelearch/:name?", function(req, res) {
+  app.get("/api/channelsearch/:name?", function(req, res) {
 
     youTube.search(req.params.name, 10,{type:'channel'}, function(error, result) {
   if (error) {
@@ -139,12 +139,7 @@ module.exports = function(app) {
 
 app.post("/api/reviewpost", function(req, res) {
     console.log(req.body);
-    db.Review.create({
-      messageBody:req.body.messageBody,
-      UserId:req.body.UserId,
-      channelId : req.body.channelId,
-      id:1
-    })
+    db.Review.create(req.body)
     .then(function(dbReview) {
       res.json(dbReview);
     });
@@ -155,9 +150,8 @@ app.post("/api/Channelpost", function(req, res) {
     db.Channel.create({
       channelDescription:req.body.channelDescription,
       name:req.body.name,
-      manufacturer:req.body.manufacturer,
       UserId:req.body.UserId,
-      id: req.body.id
+      rating: req.body.rating
     })
     .then(function(dbReview) {
       res.json(dbReview);

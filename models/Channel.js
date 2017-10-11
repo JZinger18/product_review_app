@@ -16,8 +16,8 @@ module.exports = function(sequelize, DataTypes)
       allowNull: false,
       unique:true
     },
-      manufacturer: {
-      type: DataTypes.STRING,
+      rating: {
+      type: DataTypes.INTEGER,
       allowNull: false
     }
 

@@ -71,17 +71,17 @@ function checkLoginState() {
 <br>
 <br>
 <br>
+
 <label for="name">Channel name</label>
 <input type="text" id="name">
-<label for="manufacturer">manufacturer</label>
-<input type="text" id="manufacturer">
 <label for="UserIdForChannel">UserId</label>
 <input type="text" id="UserIdForChannel">
 <label for="ChannelDescription">Channel Description</label>
 <textarea rows="3" id="ChannelDescription"></textarea>
-<label for="id">id</label>
-<input type="text" id="id">	
+<label for="ChannelRating">ChannelRating</label>
+<input type="text" id="ChannelRating">
 <button type="submit" id="submit3" >make Channel</button>
+
 <br><br><br><br>
 <label for="name">Channel name</label>
 <input type="text" id="nameOfChannelBeingSearched">
@@ -98,9 +98,9 @@ function checkLoginState() {
 <button type="submit" id="submit6" >submit review</button>
 <br><br>
 
-<label for="channelName">channel Search</label>
+<label for="channelName">channel Search on api</label>
 <input type="text" id="channelName">	
-<button type="submit" id="submit7" >submit channel search</button>
+<button type="submit" id="submit7" >submit channel search on api</button>
 
 
 <br><br><br><br>
@@ -154,8 +154,8 @@ FB.login()
 $("#submit").on("click",function(){
 	var messageBody = $("#testform").val();
 	var UserId = $("#UserId").val();
-	var channelId = $("#ChannelId").val();
-	var review = {messageBody,UserId,channelId};
+	var ChannelId = $("#ChannelId").val();
+	var review = {messageBody,UserId,ChannelId};
 	console.log("review below");
 	console.log(review);
 	$.post("/api/reviewpost", review, function(post) {
@@ -173,10 +173,10 @@ $("#submit2").on("click",function(){
 });
 $("#submit3").on("click",function(){
 	var name = $("#name").val();
-	var manufacturer = $("#manufacturer").val();
 	var UserId = $("#UserIdForChannel").val();
+  var rating = $("#ChannelRating").val();
 	var channelDescription = $("#ChannelDescription").val();
-	var Channel = {name,manufacturer,UserId,channelDescription};
+	var Channel = {name,UserId,channelDescription,rating};
 	$.post("/api/Channelpost", Channel, function(post) {
 		console.log(post);
     });

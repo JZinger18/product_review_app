@@ -39,17 +39,19 @@ var users = [];
 
 io.on('connection',function(socket){
 	console.log('new connection has been made');
-	socket.emit('message-from-server',{
-		greeting:'Hello from server'
-	});
+
+	socket.emit('message-from-server',{greeting:'Hello from server',users:users});
 
 	socket.on("message-from-client",function(message){
 		console.log(message);
 	});
 	socket.on("message-from-client-chat",function(message){
 		console.log(message);
+		if (!users.includes(message.user)){
 		users.push(message.user);
-		socket.broadcast.emit("updateChat",{message,users});
+		console.log("users is"+users);
+	}
+		socket.broadcast.emit("updateChat",{message,users:users});
 	});
 	
 })

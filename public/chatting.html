@@ -12,12 +12,23 @@
 <body>
 <script>
   var socket = io('http://localhost:8080');
-  socket.on("message-from-server",function(message){
+  
+socket.on("message-from-server",function(message){
+  console.log(message);
+          var onlineUsers2 = $("<div>");
+        if(message.users.length>1){
+          message.users.forEach(function(x){
+            onlineUsers2.append(`<p>${x}</p>`);
+          })
+        }
+    $("#onlineUsers").html(onlineUsers2);
     console.log(message);
   });
+
   socket.emit("message-from-client",{
     greeting:'Hello from Client'
   });
+
 </script>
 <!-- 
 <div id="fb-root"></div>
@@ -65,7 +76,8 @@ function checkLoginState() {
 <label for="email">email</label>
 <input type="text" id="email">
 <button type="submit" id="submit2">make user</button>
-<div id = "onlineUsers">
+<h4>online users</h4>
+<div id = "onlineUsers" style = "border-style: solid; border-width: 5px; border-color: blue">
   
 </div>
 <div id = "messageHolder">
@@ -116,7 +128,15 @@ $("#submit").on("click",function(){
 });
 
 socket.on("updateChat",function(message){
-  $("#onlineUsers").append(message.users)
+    var onlineUsers = $("<div>");
+    console.log(message);
+    console.log("this is happening");
+      if(message.users.length>1){
+        message.users.forEach(function(x){
+          onlineUsers.append(`<p>${x}</p>`);
+        })
+      }
+  $("#onlineUsers").html(onlineUsers);
 
   $("#messageHolder").append(
     $("<div>").html(`

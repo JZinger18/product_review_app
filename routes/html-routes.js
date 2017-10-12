@@ -32,7 +32,7 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:d
     });
   });
 
-  app.get("/", function(req, res) {
+/*  app.get("/", function(req, res) {
     db.Channel.findAndCountAll({
       limit: 12,
       offset: 0,
@@ -47,7 +47,7 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:d
       })
       res.render("dashboard",{channels:channels});
     });
-  });
+  });*/
 
   app.get("/testing", function(req, res) {
     res.render("testing");

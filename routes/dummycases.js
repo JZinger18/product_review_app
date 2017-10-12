@@ -31,6 +31,21 @@
       password:"abc11abc22",
       email:"testuser4@gmail.com"
     });
+     db.User.create({
+      username:"testUser5",
+      password:"abc11abc22",
+      email:"testuser5@gmail.com"
+    });
+     db.User.create({
+      username:"testUser6",
+      password:"abc11abc22",
+      email:"testuser6@gmail.com"
+    });
+     db.User.create({
+      username:"testUser7",
+      password:"abc11abc22",
+      email:"testuser7@gmail.com"
+    });
       res.redirect("/testing");
         });
     app.get("/addchannelValues",function(req,res){

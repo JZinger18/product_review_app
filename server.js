@@ -25,34 +25,55 @@ passport.use(new FacebookStrategy({
     clientSecret: "71d64445ec57767bb1ec1848f9c2c0a8",
     callbackURL: "http://localhost:8080/auth/facebook/callback"
   },
-  function(accessToken, refreshToken, profile, cb) {
-  	console.log(profile);
-  	var user = {profile};
- 	cb(null,user);
+  function(accessToken, refreshToken, profile, done) {
+
+  db.User.findOrCreate({where: {fbId: profile.id}, defaults: {username: profile.displayName}})
+  .spread((user, created) => {
+    console.log("created is below");
+    console.log(created);
+    console.log("plain user below");
+    user = user.get({plain:true});
+    console.log(user);
+    return done(null,user);
+  })
   }
 ));
+
 passport.serializeUser(function(user, done) {
-  done(null, {id:user.id,name:"andrew"});
+  done(null, user.id);
 });
+
+
+
 passport.deserializeUser(function(id, done) {
-    done(null, {id:id,name:"andrew"});
+db.User.findOne({where:{id}}).then(function(user){
+done(null,user);
 });
 
-app.use(session({ secret: "amAwesome" }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(passport.initialize());
-app.use(bodyParser.json());
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-app.use(cookieParser());
-
-
+});
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Static directory
 app.use(express.static(path.join(__dirname,"public")));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+app.use(cookieParser());
+app.use(session({
+  secret: 'awill',
+  saveUninitialized: true,
+  resave: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+
+
+// Static directory
 var users = [];
 
 
@@ -94,7 +115,7 @@ app.get('/auth/facebook/callback',
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync().then(function() {
+db.sequelize.sync({force:true}).then(function() {
  	server.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });

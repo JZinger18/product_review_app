@@ -51,5 +51,8 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12`,{type:db.sequeliz
   app.get("/testing", function(req, res) {
     res.render("testing");
   });
+    app.get("/chatting", function(req, res) {
+    res.render("chatting");
+  });
 
 };

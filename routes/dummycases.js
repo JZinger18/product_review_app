@@ -84,7 +84,7 @@
      	{
      	messageBody:"PewDiePie is certainly not the greatest creator on the youtube platform, however, his fame and notoriety are certainly not unwarranted",
      	UserId:2,
-     	ChannelId:2,
+     	ChannelId:1,
      	rating:4
      	}
      );
@@ -92,7 +92,7 @@
      	{
      	messageBody:"The young turks are famous for speaking truth to power and having the most amount of trolls anyone has ever seen",
      	UserId:1,
-     	ChannelId:4,
+     	ChannelId:2,
      	rating:3
      	}
      );
@@ -108,7 +108,7 @@
      	{
      	messageBody:"Ya boy Ethan the thicc boi, greatest man of all time without a doubt. all Praise lord Ethan.",
      	UserId:4,
-     	ChannelId:1,
+     	ChannelId:4,
      	rating:5
      	}
      );

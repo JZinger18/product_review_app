@@ -6,8 +6,14 @@
 // =============================================================
 
 // Requiring our Todo model
-var db = require("../models");
-var Sequelize = require('sequelize');
+var db = require('../models');
+var Op = require('sequelize').Op;
+var YouTube = require('youtube-node');
+var wholeObject;
+var youTube = new YouTube();
+youTube.setKey('AIzaSyAwef6wBJ9KUllwk0ab6ynzOKzrYutkaoM');
+
+
 
 
 // Routes
@@ -15,13 +21,22 @@ var Sequelize = require('sequelize');
 module.exports = function(app) {
 
   // GET route for getting all of the Reviews
-  app.get("/api/getAllReviews/:name?", function(req, res) {
-   console.log(req.params.name);
 
-    db.Product.findAndCountAll({
-      limit: 12,
+
+  app.post('/cookie',function(req, res){
+      var value = req.body.username;
+     res.cookie("name" , value).redirect("/public/index.html");
+});
+
+
+  app.get("/api/getAllChannels/:name", function(req, res) {
+
+    db.Channel.findAndCountAll({
+      limit: req.query.limit,
       offset: 0,
-      where:{name:req.params.name},
+      where:{name:{
+        [Op.like]:"%"+req.params.name+"%"
+      }},
         attributes: {
          exclude: ['createdAt']  
        },
@@ -30,6 +45,20 @@ module.exports = function(app) {
     .then(function(dbReview) {
       res.json(dbReview);
     });
+  });
+
+    app.get("/api/getOneChannel/:name", function(req, res) {
+      db.Channel.findOne({
+        where:{
+      name:req.params.name
+       },
+       attributes:{
+        exclude:['manufacturer','createdAt']
+       }
+     })
+    .then(function(dbReview) {
+      res.json(dbReview);
+    })
   });
 
   // Get route for returning Reviews of a specific category
@@ -45,16 +74,44 @@ module.exports = function(app) {
   });*/
 
   // Get rotue for retrieving a single Review
- /* app.get("/api/Reviews/:id", function(req, res) {
-    db.Review.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-    .then(function(dbReview) {
-      res.json(dbReview);
-    });
-  });*/
+
+
+
+
+
+
+
+
+
+
+  app.get("/api/channelsearch/:name?", function(req, res) {
+
+    youTube.search(req.params.name, 10,{type:'channel'}, function(error, result) {
+  if (error) {
+    console.log(error);
+  }
+  else {
+    console.log(result);
+    var response = result.items.map(
+
+      function (channelresultsValues)
+         {
+          let id = channelresultsValues["id"]["channelId"];
+          let title = channelresultsValues["snippet"]["title"];
+          let description = channelresultsValues["snippet"]["description"];
+          let url = channelresultsValues["snippet"]["thumbnails"]["default"]["url"];
+          return {id,title,description,url};
+         }
+
+         );
+
+      res.json({response,result});
+  }
+
+});
+
+
+  });
 
   // Review route for saving a new Review
 /*  app.post("/api/Reviews", function(req, res) {
@@ -84,24 +141,15 @@ module.exports = function(app) {
 
 app.post("/api/reviewpost", function(req, res) {
     console.log(req.body);
-    db.Review.create({
-      messageBody:req.body.messageBody,
-      UserId:req.body.UserId,
-      ProductId : req.body.ProductId,
-      id:1
-    })
+    db.Review.create(req.body)
     .then(function(dbReview) {
       res.json(dbReview);
     });
   });
 
-app.post("/api/productpost", function(req, res) {
-    db.Product.create({
-      productDescription:req.body.productDescription,
-      name:req.body.name,
-      manufacturer:req.body.manufacturer,
-      UserId:req.body.UserId
-    })
+app.post("/api/Channelpost", function(req, res) {
+
+    db.Channel.create(req.body)
     .then(function(dbReview) {
       res.json(dbReview);
     });

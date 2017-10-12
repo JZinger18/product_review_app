@@ -18,19 +18,12 @@ module.exports = function(sequelize, DataTypes)
         is: /^[^@]+@[^@]+.[^@]{3,6}$/i,
         len: [1,50]
       },
-      unique:true
     },
       status: 
       {
         type: DataTypes.ENUM('active', 'inactive'),
         defaultValue: 'active'
-        },
-      FbId:
-      {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique:true
-      }
+        }
   });
 
     User.associate = function(models) {

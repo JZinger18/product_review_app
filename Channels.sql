@@ -1,7 +1,4 @@
-/*
--- Query: SELECT * FROM review_app_db.Channels
--- Date: 2017-10-11 22:57
-*/
+
 INSERT INTO `Channels` (`id`,`channelDescription`,`name`,`thumbnail`,`category`,`createdAt`,`updatedAt`,`UserId`) VALUES (1,'We make comedy videos','h3h3Productions','https://yt3.ggpht.com/-QWMKBXNBE2E/AAAAAAAAAAI/AAAAAAAAAAA/rEARmBXfgHw/s88-c-k-no-mo-rj-c0xffffff/photo.jpg','comedy','2017-10-12 02:45:09','2017-10-12 02:45:09',1);
 INSERT INTO `Channels` (`id`,`channelDescription`,`name`,`thumbnail`,`category`,`createdAt`,`updatedAt`,`UserId`) VALUES (2,'I make videos','PewDiePie','https://yt3.ggpht.com/-rJq9gk1QIis/AAAAAAAAAAI/AAAAAAAAAAA/Kx4wkvKOfxY/s88-c-k-no-mo-rj-c0xffffff/photo.jpg','gaming','2017-10-12 02:45:09','2017-10-12 02:45:09',2);
 INSERT INTO `Channels` (`id`,`channelDescription`,`name`,`thumbnail`,`category`,`createdAt`,`updatedAt`,`UserId`) VALUES (3,'Liberal Radio Host. Social Democrat. Agnostic-Atheist. Secular Humanist. Loyal to the Facts. Principles over Politicians.','Secular Talk','https://yt3.ggpht.com/-sN5TPGyausY/AAAAAAAAAAI/AAAAAAAAAAA/ScJMYdaIA3A/s88-c-k-no-mo-rj-c0xffffff/photo.jpg','news','2017-10-12 02:45:09','2017-10-12 02:45:09',4);

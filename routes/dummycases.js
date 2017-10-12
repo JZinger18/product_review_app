@@ -8,42 +8,34 @@
 
      db.User.create({
       username:"andrewwilliams",
-      password:"abc11abc22",
       email:"andrewjameswilliams.aw@gmail.com"
     })
      db.User.create({
       username:"testUser1",
-      password:"abc11abc22",
       email:"testuser1@gmail.com"
     });
      db.User.create({
       username:"testUser2",
-      password:"abc11abc22",
       email:"testuser2@gmail.com"
     });
      db.User.create({
       username:"testUser3",
-      password:"abc11abc22",
       email:"testuser3@gmail.com"
     });
      db.User.create({
       username:"testUser4",
-      password:"abc11abc22",
       email:"testuser4@gmail.com"
     });
      db.User.create({
       username:"testUser5",
-      password:"abc11abc22",
       email:"testuser5@gmail.com"
     });
      db.User.create({
       username:"testUser6",
-      password:"abc11abc22",
       email:"testuser6@gmail.com"
     });
      db.User.create({
       username:"testUser7",
-      password:"abc11abc22",
       email:"testuser7@gmail.com"
     });
       res.redirect("/testing");

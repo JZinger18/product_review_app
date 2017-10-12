@@ -11,27 +11,26 @@ module.exports = function(sequelize, DataTypes)
       len:[1,50]
       }
     },
-    password:{
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-      len:[1,20]
-      }
-    },
     email:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate:{
         is: /^[^@]+@[^@]+.[^@]{3,6}$/i,
         len: [1,50]
       },
       unique:true
     },
-      status: {
-      type: DataTypes.ENUM('active', 'inactive'),
-      defaultValue: 'active'
-        }
-
+      status: 
+      {
+        type: DataTypes.ENUM('active', 'inactive'),
+        defaultValue: 'active'
+        },
+      FbId:
+      {
+          type: DataTypes.STRING,
+          allowNull: false,
+          unique:true
+      }
   });
 
     User.associate = function(models) {
@@ -43,6 +42,11 @@ module.exports = function(sequelize, DataTypes)
     });
 
     User.hasMany(models.Channel, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+    User.hasOne(models.OnlineUser, {
       foreignKey: {
         allowNull: false
       }

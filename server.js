@@ -4,30 +4,6 @@
 // ******************************************************************************
 // *** Dependencies
 // =============================================================
-/*
-var AmazonReviews = require("amazon-reviews");
-
-AmazonReviews.getReviewIds(
-	{
-	  productId: 'B06XJGCJ2W'
-	}, 
-function(err, reviewIds) 
-{
-	console.log(err);
-	console.log("review Id's below");
-	console.log(JSON.stringify(reviewIds));
-	reviewIds.forEach(function(reviewId){
-		AmazonReviews.getReview(
-			{
-			  productId: 'B06XJGCJ2W',
-			  reviewId: reviewId
-			},
-	function(err, review) 
-		{
-		 console.log(review);
-		});
-	}) ; 
-});*/
 
 var express = require("express");
 var bodyParser = require("body-parser");

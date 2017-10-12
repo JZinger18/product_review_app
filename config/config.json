@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "Cochito001",
     "database": "review_app_db",
     "host": "localhost",
     "dialect": "mysql"

@@ -32,6 +32,13 @@
 <br>
 <br>
 <br>
+<p><b>RETURN CHANNEL REVIEW STATS<b><p>
+<label for="channel_id">CHANNEL ID</label>
+<input type="text" id="channel_id">
+<button type="submit" id="submit7">Return Stats</button>
+<div id ="Channel_stats"></div>
+<br>
+<br>
 <br>
 <br>
 <label for="name">product name</label>
@@ -124,6 +131,12 @@ $("#submit6").on("click",function(){
     });
 });
 
+$("#submit7").on("click",function(){
+    var name = $("#nameOfProductBeingSearched").val();
+    $.get("/api/getChannelStats/"+id, function(products) {
+        console.log(products);
+    });
+});
 
 
 

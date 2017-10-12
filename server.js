@@ -50,7 +50,8 @@ io.on('connection',function(socket){
 		if (!users.includes(message.user)){
 		users.push(message.user);
 		console.log("users is"+users);
-	}
+	}	
+		socket.emit("updateChat",{users});
 		socket.broadcast.emit("updateChat",{message,users:users});
 	});
 	

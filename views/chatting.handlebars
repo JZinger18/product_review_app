@@ -119,19 +119,21 @@ socket.on("updateChat",function(message){
     var onlineUsers = $("<div>");
     console.log(message);
     console.log("this is happening");
-      if(message.users.length>1){
+      if(message.users.length>=1){
         message.users.forEach(function(x){
           onlineUsers.append(`<p>${x}</p>`);
         })
       }
   $("#onlineUsers").html(onlineUsers);
-
-  $("#messageHolder").append(
-    $("<div>").html(`
-  <span>${message.message.user}:</span><br>
-  <p>${message.message.message}</p>
-  `)
-    );
+  if(message.message)
+  {
+    $("#messageHolder").append(
+      $("<div>").html(`
+    <span>${message.message.user}:</span><br>
+    <p>${message.message.message}</p>
+    `)
+      );
+  }
 })
 $("#submit2").on("click",function(){
 	var username = $("#username").val();

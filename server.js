@@ -173,6 +173,8 @@ require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 require("./routes/dummycases.js")(app);
 require("./routes/channel-routes.js")(app);
+require("./routes/testroute.js")(app);
+require("./routes/testcases.js")(app);
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'));

@@ -1,0 +1,355 @@
+
+<nav class="navbar navbar-info navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+  <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse">
+            <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index_SA.html"><img class="img" src="img/TubeReview_logo_light.png" style="height: 41px; width: 133px"/></a>
+      </div>
+
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/auth/facebook" class="btn btn-white btn-simple profile-photo">
+              <div class="profile-photo-small">
+                              <img src="img/avatar.jpg" alt="Circle Image" class="img-circle img-responsive">Log in
+                          </div><!-- <i class="material-icons">person</i> --> 
+            </a>
+          </li>
+            </ul>
+          </div>
+      </div>
+    </nav>
+
+
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('img/city.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="brand">
+                <div class="card card-raised card-form-horizontal">
+                      <div class="card-content">
+                        <form method="get" action="/api/getAllChannels" id="searchForm">
+                          <div class="row">
+                            <div class="col-sm-8">
+                              <div class="input-group input-info">
+                                <span class="input-group-addon">
+                                </span>
+                                <input type="text" name="searchValue" placeholder="Channel Search" class="form-control" id="channelSearch"/>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <button  type="submit" class="btn btn-info btn-block">
+                                  <i class="material-icons">search</i> Search</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main main-raised">
+    <div class="profile-content">
+<!--             <div class="container">
+                    <div class="col-xs-2 follow col-xs-offset-10">
+                     <button class="btn btn-info">
+                            <i class="material-icons">add </i> Post a Review
+                        </button>
+                  </div>
+                </div> -->
+
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <select class="selectpicker" data-style="btn btn-default" title="Single Select" data-size="10">
+                <option disabled selected>5 Star Channels</option>
+                <option value="2">4 Stars Channels</option>
+                <option value="3">3 Stars Channels</option>
+                <option value="4">2 Stars Channels</option>
+                <option value="5">1 Star Channels</option>
+                <option value="6">Not Rated</option>
+              </select>
+                      
+                    </div>
+
+                    <div class="col-md-4">
+                      <select class="selectpicker" data-style="btn btn-default" title="Single Select" data-size="7">
+                <option disabled selected>Review Amonut:</option>
+                <option value="2">Ascending</option>
+                <option value="3">Descending</option>
+              </select>
+                      
+                    </div>
+
+                    <div class="col-md-4">
+                      <select class="selectpicker" data-style="btn btn-default" title="Single Select" data-size="7">
+                <option disabled selected>Channel Category</option>
+                <option value="2">Foobar</option>
+                <option value="3">Is great</option>
+              </select>
+                    </div>
+                  </div>
+                </div>
+
+        <div class="space-70"></div>
+
+          <!--     *********   CARDS     *********      -->
+
+          <div class="cards">
+
+          <div class="container">
+                <div class="title">
+                  
+                </div></br>
+
+
+        
+          {{#each channels}}
+            {{> cards/card}}
+          {{/each}}
+        
+                    <div id ="Cardspage">
+                      <span>after this</span>
+                    </div>
+               <script>
+
+
+
+                         setTimeout(function(){
+                       var posi = Number({{position}});
+                       console.log(posi);
+                       if (posi == null){
+                           posi = 1;
+                       }
+                       var values = GetPager(Number({{amountOfRows}}),posi,12);
+                       console.log(values);
+                       console.log(values.startPage);
+                       console.log(values.endPage);
+                       for (var i = values.startPage;i <=values.endPage; i++) {
+                           let page = $("<span>");
+                            page.html(`<a href = "/channelrenderingtest?amount=${i}">${i}</a>`);
+                           $('#Cardspage').append(page);                                    
+                       };
+    function GetPager( totalItems, currentPage, pageSize) {
+    // default to first page
+    currentPage = currentPage || 1;
+    pageSize = pageSize || 10;
+    // calculate total pages
+    var totalPages = Math.ceil(totalItems / pageSize);
+    var startPage, endPage;
+    if (totalPages <= 10) {
+        // less than 10 total pages so show all
+        startPage = 1;
+        endPage = totalPages;
+    } else {
+        // more than 10 total pages so calculate start and end pages
+        if (currentPage <= 6) {
+            startPage = 1;
+            endPage = 10;
+        } else if (currentPage + 4 >= totalPages) {
+            startPage = totalPages - 9;
+            endPage = totalPages;
+        } else {
+            startPage = currentPage - 5;
+            endPage = currentPage + 4;
+        }
+    }
+    // calculate start and end item indexes
+    var startIndex = (currentPage - 1) * pageSize;
+    var endIndex = startIndex + pageSize;
+    // create an array of pages to ng-repeat in the pager control
+    var pages = range(startPage, endPage + 1);
+    // return object with all pager properties required by the view
+    return {
+        totalItems: totalItems,
+        currentPage: currentPage,
+        pageSize: pageSize,
+        totalPages: totalPages,
+        startPage: startPage,
+        endPage: endPage,
+        startIndex: startIndex,
+        endIndex: endIndex,
+        pages: pages
+    };
+}
+   function range(s, e, str){
+  // create generator that handles numbers & strings.
+  function *gen(s, e, str){
+    while(s <= e){
+      yield (!str) ? s : str[s]
+      s++
+    }
+  }
+  if (typeof s === 'string' && !str)
+    str = 'abcdefghijklmnopqrstuvwxyz'
+  const from = (!str) ? s : str.indexOf(s)
+  const to = (!str) ? e : str.indexOf(e)
+  // use the generator and return.
+  return [...gen(from, to, str)]
+}
+
+},100);                   
+                        </script>
+
+                      </div>
+
+            </div>
+          </div>
+
+          </div>
+          <!--     *********    END CARDS      *********      -->
+
+            </div>
+        </div>
+  </div>
+
+    <footer class="footer">
+        <div class="container">
+            <nav class="pull-left">
+        <ul>
+          <li>
+            <a href="index.html">
+              Tube Review
+            </a>
+          </li>
+          <li>
+            <a href="#">
+               Channels
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Privacy Policy
+            </a>
+          </li>
+        </ul>
+            </nav>
+            <div class="copyright pull-right">
+                &copy; <script>document.write(new Date().getFullYear())</script> Tube Review | All Rights Reserved
+            </div>
+        </div>
+    </footer>
+
+     <!-- Start of Post a Review Modal -->
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login">
+    <div class="modal-content">
+      <div class="card card-signup card-plain">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+
+                  <div class="card card-profile">
+                    <div class="card-avatar">
+                      <a href="#">
+                        <img class="img" src="img/marques_avatar.jpg" />
+                      </a>
+                    </div>
+                      <a href="#" class="btn btn-just-icon btn-warning btn-simple">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </a>
+                    <div class="card-content">
+
+                      <h4 class="card-title">Marques Brownlee</h4>
+                    </div>
+                  </div>
+        </div>
+        <div class="modal-body">
+          <form class="form" method="" action="">
+            <div class="card-content">
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">subtitles</i>
+                </span>
+                <input type="text" class="form-control" placeholder="Review Title:">
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">star_half</i>
+                </span>
+                <input type="number" class="form-control" placeholder="Channel Score: 1-5 Stars">
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">comment</i>
+                </span>
+                <textarea class="form-control" placeholder="Write some nice stuff..." rows="5"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+          <div class="modal-footer text-center">
+            <a href="#" class="btn btn-danger btn-default"><i class="material-icons">add </i>Submit</a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  End Post a Review Modal-->
+
+<!-- facebook Login Modal -->
+<div class="modal fade" id="fb_loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login">
+    <div class="modal-content">
+          <div class="card card-signup">
+            <form class="form" method="" action="">
+              <div class="header header-info text-center">
+                <h4 class="card-title">Log in w/ facebook</h4>
+                <div class="social-line">
+                  <a href="#" class="btn btn-just-icon btn-simple">
+                    <i class="fa fa-facebook-square"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-content">
+              </div>
+                            <div class="footer text-center">
+                            <button class="btn btn-social btn-fill btn-facebook">
+                                <i class="fa fa-facebook-square"></i> Log in with facebook
+                            </button>
+                            </div>
+            </form>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    var slider = document.getElementById('sliderRegular');
+          noUiSlider.create(slider, {
+              start: 40,
+              connect: [true,false],
+              range: {
+                  min: 0,
+                  max: 100
+              }
+          });
+          var slider2 = document.getElementById('sliderDouble');
+          noUiSlider.create(slider2, {
+              start: [ 20, 60 ],
+              connect: true,
+              range: {
+                  min:  0,
+                  max:  100
+              }
+          });
+      materialKit.initFormExtendedDatetimepickers();
+</script>
+

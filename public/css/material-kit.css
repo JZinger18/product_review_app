@@ -8407,3 +8407,10 @@ select.selectpicker {
     width: 920px;
   }
 }
+
+#Cardspage{
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+  size: 50px;
+}

@@ -29,34 +29,3 @@ app.get("/channels/:value",function(req,res){
   });
 
 };
-	/*  {
-"dbReview": {
-"id": 1,
-"channelDescription": "We make comedy videos",
-"name": "h3h3Productions",
-"thumbnail": "https://yt3.ggpht.com/-QWMKBXNBE2E/AAAAAAAAAAI/AAAAAAAAAAA/rEARmBXfgHw/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
-"category": "comedy",
-"updatedAt": "2017-10-13T19:39:21.000Z",
-"UserFbId": "abc11abc23",
-"Reviews": [
-  {
-  "id": 5,
-  "title": "sample title",
-  "messageBody": "Ethan Klein is certaily not underrated and I believe deserves alot more attention than he currently receives. However I really hope he goes back to regularly uploading so we can get some fresh hot memes",
-  "rating": 4,
-  "createdAt": "2017-10-12T02:45:17.000Z",
-  "updatedAt": "2017-10-12T02:45:17.000Z",
-  "ChannelId": 1,
-  "UserFbId": "abc11abc29",
-  "User": {
-      "username": "testUser6",
-      "email": "testuser6@gmail.com",
-      "status": "active",
-      "fbId": "abc11abc29",
-      "createdAt": "2017-10-13T19:39:16.000Z",
-      "updatedAt": "2017-10-13T19:39:16.000Z"
-  }
-  },
-]
-}
-}*/

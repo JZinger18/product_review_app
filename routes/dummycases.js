@@ -223,26 +223,21 @@
      db.Review.create(
      	{
      	messageBody:"PewDiePie is certainly not the greatest creator on the youtube platform, however, his fame and notoriety are certainly not unwarranted",
-<<<<<<< HEAD
      	UserId:2,
      	ChannelId:1,
-=======
      	UserFbId:"abc11abc30",
      	ChannelId:2,
->>>>>>> 1138c040cd636f203808c5a5b6345fa54b0ca26d
      	rating:4
      	}
      );
      db.Review.create(
      	{
      	messageBody:"The young turks are famous for speaking truth to power and having the most amount of trolls anyone has ever seen",
-<<<<<<< HEAD
+
      	UserId:1,
      	ChannelId:2,
-=======
      	UserFbId:"abc11abc27",
      	ChannelId:4,
->>>>>>> 1138c040cd636f203808c5a5b6345fa54b0ca26d
      	rating:3
      	}
      );
@@ -257,13 +252,10 @@
      db.Review.create(
      	{
      	messageBody:"Ya boy Ethan the thicc boi, greatest man of all time without a doubt. all Praise lord Ethan.",
-<<<<<<< HEAD
      	UserId:4,
      	ChannelId:4,
-=======
      	UserFbId:"abc11abc23",
      	ChannelId:1,
->>>>>>> 1138c040cd636f203808c5a5b6345fa54b0ca26d
      	rating:5
      	}
      );

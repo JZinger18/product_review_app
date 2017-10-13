@@ -172,6 +172,7 @@ To leave a channel you call leave in the same fashion as join.
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 require("./routes/dummycases.js")(app);
+require("./routes/channel-routes.js")(app);
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'));

@@ -85,6 +85,7 @@ io.on('connection',function(socket){
   socket.on("message-from-client",function(message){
     console.log(message);
   });
+
   socket.on("message-from-client-chat",function(message){
     console.log(message);
     if (!users.includes(message.user)){
@@ -99,19 +100,25 @@ io.on('connection',function(socket){
     db.User.findOne({where:{
         fbId: user.id
     }}).then(function(x){
-      console.log("this is the response to a valid connection");
-
+      console.log(x);
+      //have to create socket subscriptions dynamically and disconnect them as soon as the socket disconnects
       socket.emit("message-from-server-in-response-to-connection",
       {
         
       })
-      db.OnlineUser.create({
-        userFbid : user.id
-      })
+        if(x)
+        {
+          db.OnlineUser.create({
+            UserFbid : user.id,
+            ChannelId:user.ChannelId
+          })
+        }
     })
 
 
   })
+
+  socket.removeAllListeners("message-from-client-chat");
   
 })
 
@@ -133,7 +140,7 @@ app.get('/auth/facebook/callback',
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({force:true}).then(function() {
+db.sequelize.sync().then(function() {
   server.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });

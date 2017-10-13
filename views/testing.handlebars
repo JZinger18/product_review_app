@@ -1,11 +1,11 @@
 <script>
 
     var socket = io('http://localhost:8080');
-  socket.on("message-from-server",function(message){
+/*  socket.on("message-from-server",function(message){
     console.log(message);
-  });
+  });*/
   socket.on("message-from-server-in-response-to-connection",function(message){
-    console.log(message);
+    console.log("below is the response from the server in response to a connection request");
   });
 
 
@@ -31,8 +31,11 @@
       {
         socket.emit("message-from-client-check-log-in-status",{
           id : x.authResponse.userID,
-          channelId: $("#channelDiv").data("id")
+          ChannelId: $("#channelDiv").data("id")
         });
+      }
+      else{
+        console.log("user is not qualified to see chat");
       }
 
   }

@@ -26,7 +26,7 @@ module.exports = function(app) {
     console.log(req.user);
 
     db.Channel.findAndCountAll({
-      limit: 12,
+      limit: 12,//need to add the logic for this submission
       offset: 0,
       where:{name:{
         [Op.like]:"%"+req.query.searchValue+"%"
@@ -43,9 +43,10 @@ module.exports = function(app) {
         var ratingValue = x.Reviews.reduce(function(a,b){
             return a + b.rating
           },0)/x.Reviews.length;
-                return{name:x.name,category:x.category,channelDescription:x.channelDescription,ratingValue:`<i class="fa fa-star"></i>`.repeat(Math.round(x.amountOfStars)),thumbnail:x.thumbnail}
+                return{name:x.name,category:x.category,channelDescription:x.channelDescription,ratingValue:`<i class="fa fa-star"></i>`.repeat(Math.round(ratingValue)),thumbnail:x.thumbnail}
        });
-          res.render("dashboard",{channels,amountOfRows:dbReview.rows.length});
+//         res.render("dashboard",{channels,amountOfRows:dbReview.rows.length});
+            res.json({dbReview,channels});
         });
   });
 

@@ -1,11 +1,12 @@
 <script>
 
-    var socket = io('http://localhost:8080');
-/*  socket.on("message-from-server",function(message){
+    var client = io('/');
+/*  client.on("message-from-server",function(message){
     console.log(message);
   });*/
-  socket.on("message-from-server-in-response-to-connection",function(message){
+  client.on("message-from-server-in-response-to-connection",function(message){
     console.log("below is the response from the server in response to a connection request");
+    console.log(message);
   });
 
 
@@ -29,9 +30,9 @@
   function statusChangeCallback(x){
     if(x.status == "connected")
       {
-        socket.emit("message-from-client-check-log-in-status",{
+        client.emit("message-from-client-check-log-in-status",{
           id : x.authResponse.userID,
-          ChannelId: $("#channelDiv").data("id")
+          ChannelId: 4
         });
       }
       else{
@@ -47,7 +48,7 @@
   });
 }
 
-setTimeout(checkLoginState,500);
+setTimeout(checkLoginState,50);
 
 </script>
 

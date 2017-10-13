@@ -45,13 +45,13 @@ passport.use(new FacebookStrategy({
 ));
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user.fbId);
 });
 
 
 
 passport.deserializeUser(function(id, done) {
-db.User.findOne({where:{id}}).then(function(user){
+db.User.findOne({where:{fbId:id}}).then(function(user){
 done(null,user);
 });
 

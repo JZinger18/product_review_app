@@ -118,7 +118,7 @@ io.on('connection',function(socket){
 
   })
 
-  socket.removeAllListeners("message-from-client-chat");
+ // socket.removeAllListeners("message-from-client-chat");
   
 })
 
@@ -131,10 +131,10 @@ app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/testing' }),
+  passport.authenticate('facebook', { failureRedirect: '/channelRendering' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/testing');
+    res.redirect('/channelRendering');
   });
 
 

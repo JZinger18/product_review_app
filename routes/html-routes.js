@@ -16,7 +16,8 @@ module.exports = function(app) {
   // Each of the below routes just handles the HTML page that the user gets sent to
 
   app.get("/channelrendering", function(req, res) {
-    var offset = req.query.amount? "OFFSET "+req.query.amount: "";
+
+    var offset = req.query.amount? "OFFSET "+((req.query.amount-1)*12): "";
     db.sequelize.query(`
       SELECT Channels.id as id,Channels.name as name ,count(Reviews.id) as amountOfReviews,avg(Reviews.rating)as amountOfStars, Channels.category as category,Channels.thumbnail as thumbnail,Channels.channelDescription as channelDescription
 FROM Channels INNER JOIN Reviews ON Reviews.Channelid = Channels.id

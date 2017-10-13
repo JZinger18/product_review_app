@@ -28,6 +28,23 @@ module.exports = function(sequelize, DataTypes)
       }
 
   });
+  Channel.associate = function(models){
+
+    Channel.hasMany(models.Review, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+    Channel.belongsTo(models.User, 
+    {
+      foreignKey: 
+        {
+          allowNull: false
+        }
+    });
+
+ } 
 
   return Channel;
 

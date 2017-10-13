@@ -4,6 +4,15 @@ module.exports = function(sequelize, DataTypes)
   var Review = sequelize.define("Review", 
   {
 
+    title:{
+      type:DataTypes.STRING,
+      allowNull:true,
+      validate:
+      {
+        len:[5,20]
+      }
+
+    },
     messageBody: 
       {
       type: DataTypes.TEXT,

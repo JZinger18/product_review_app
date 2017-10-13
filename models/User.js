@@ -30,7 +30,8 @@ module.exports = function(sequelize, DataTypes)
       {
         type: DataTypes.STRING,
         allowNull: false,
-        unique:true
+        unique:true,
+        primaryKey: true
       }
   });
 
@@ -43,11 +44,6 @@ module.exports = function(sequelize, DataTypes)
     });
 
     User.hasMany(models.Channel, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-    User.hasOne(models.OnlineUser, {
       foreignKey: {
         allowNull: false
       }

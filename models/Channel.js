@@ -41,11 +41,6 @@ module.exports = function(sequelize, DataTypes)
         allowNull: false
       }
     });
-    Channel.hasMany(models.OnlineUser, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
 
   };
 

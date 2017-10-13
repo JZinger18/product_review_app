@@ -126,6 +126,7 @@ io.on('connection',function(socket){
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 require("./routes/dummycases.js")(app);
+require("./routes/channel-route.js")(app);
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'));

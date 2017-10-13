@@ -194,8 +194,9 @@ app.get('/auth/facebook/callback',
     console.log(req.user);
 /*    db.OnlineUser.findOne({where:{UserfbId : req.user.fbId}})
 */    res.redirect("/channelRendering")
+   }
 
-  };
+  });
 
 
 // Syncing our sequelize models and then starting our Express app

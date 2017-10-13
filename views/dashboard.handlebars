@@ -115,9 +115,102 @@
 					{{#each channels}}
 						{{> cards/card}}
 					{{/each}}
+        
+                    <div id ="Cardspage"></div>
+               <script>
+                       var posi = {{position}}
 
-					
-	    				</div>
+                       console.log(posi);
+                       if (posi == null){
+                           posi = 1;
+                       }
+
+                       var values = GetPager({{amountOfRows}},posi,12);
+
+                       console.log(values);
+                       console.log(values.startPage);
+                       console.log(values.endPage);
+
+                       for (var i = values.startPage; i <= values.endPage; i++) {
+                           var page = $("<span>");
+                            page.html('<a href = "/channelrendering?amount='+i+'"><strong>'+i+'</strong></a>');
+                          
+                           $('#Cardspage').append(page);
+                           $('#Cardspage').append(' ');
+                                    
+                       };
+
+    function GetPager( totalItems, currentPage, pageSize) {
+    // default to first page
+    currentPage = currentPage || 1;
+
+    pageSize = pageSize || 10;
+
+    // calculate total pages
+    var totalPages = Math.ceil(totalItems / pageSize);
+
+    var startPage, endPage;
+    if (totalPages <= 10) {
+        // less than 10 total pages so show all
+        startPage = 1;
+        endPage = totalPages;
+    } else {
+        // more than 10 total pages so calculate start and end pages
+        if (currentPage <= 6) {
+            startPage = 1;
+            endPage = 10;
+        } else if (currentPage + 4 >= totalPages) {
+            startPage = totalPages - 9;
+            endPage = totalPages;
+        } else {
+            startPage = currentPage - 5;
+            endPage = currentPage + 4;
+        }
+    }
+
+    // calculate start and end item indexes
+    var startIndex = (currentPage - 1) * pageSize;
+    var endIndex = startIndex + pageSize;
+
+    // create an array of pages to ng-repeat in the pager control
+    var pages = range(startPage, endPage + 1);
+
+    // return object with all pager properties required by the view
+    return {
+        totalItems: totalItems,
+        currentPage: currentPage,
+        pageSize: pageSize,
+        totalPages: totalPages,
+        startPage: startPage,
+        endPage: endPage,
+        startIndex: startIndex,
+        endIndex: endIndex,
+        pages: pages
+    };
+}
+   function range(s, e, str){
+  // create generator that handles numbers & strings.
+  function *gen(s, e, str){
+    while(s <= e){
+      yield (!str) ? s : str[s]
+      s++
+    }
+  }
+  if (typeof s === 'string' && !str)
+    str = 'abcdefghijklmnopqrstuvwxyz'
+  const from = (!str) ? s : str.indexOf(s)
+  const to = (!str) ? e : str.indexOf(e)
+  // use the generator and return.
+  return [...gen(from, to, str)]
+}                   
+
+
+
+                        </script>
+
+                      </div>
+
+     				</div>
 	    		</div>
 
 	    		</div>
@@ -216,3 +309,4 @@
 	</div>
 </div>
 <!--  End Post a Review Modal-->
+<script src="/js/jquery.min.js" type="text/javascript"></script>

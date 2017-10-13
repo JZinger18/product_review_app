@@ -17,6 +17,7 @@ module.exports = function(app) {
 
   app.get("/channelrendering", function(req, res) {
     var offset = req.query.amount? "OFFSET "+req.query.amount: "";
+    var position = req.query.amount;
     db.sequelize.query(`
       SELECT Channels.id as id,Channels.name as name ,count(Reviews.id) as amountOfReviews,avg(Reviews.rating)as amountOfStars, Channels.category as category,Channels.thumbnail as thumbnail,Channels.channelDescription as channelDescription
 FROM Channels INNER JOIN Reviews ON Reviews.Channelid = Channels.id
@@ -28,8 +29,8 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:d
       })
 
      db.Channel.count("id").then(function(amountOfRows){
-/*      console.log(channels);
-*/      res.render("dashboard",{channels,amountOfRows});
+         console.log(amountOfRows);
+      res.render("dashboard",{channels,amountOfRows,position});
      })
     });
   });

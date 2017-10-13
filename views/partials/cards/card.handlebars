@@ -1,27 +1,49 @@
-	    					<div class="col-md-4">
-	    						<div class="card card-profile">
-	    							<div class="card-avatar">
-	    								<a href="#">
-	    									<img class="img" src="{{this.thumbnail}}" />
-	    								</a>
-	    							</div>
-	    								<a href="#" class="btn btn-just-icon btn-warning btn-simple">
+<!-- <div class ='row .row-eq-height'> -->
+	<div class="col-md-4 ">
+		<div style ='height:400px' class="card card-profile">
+			<div class="card-avatar">
+				<a href="#">
+					<img class="img" src="{{this.thumbnail}}" />
+				</a>
+			</div>
+				<div class='row'>
+					<div class = 'col-md-12'>
+						<a href="#" class="btn btn-just-icon btn-warning btn-simple">
 
-	    									{{{this.ratingValue}}}
+							{{{this.ratingValue}}}
 <!-- 	    									<i class="fa fa-star"></i>
-	    									<i class="fa fa-star"></i>
-	    									<i class="fa fa-star"></i>
-	    									<i class="fa fa-star"></i>
-	    									<i class="fa fa-star"></i> -->
-	    								</a>
-	    							<div class="card-content">
-	    								<h4 class="card-title">{{this.name}}</h4>
-	    								<h6 class="category text-gray">{{this.category}}</h6>
-	    								<p class="card-description">
-	    									{{this.channelDescription}}
-	    								</p>
-	    								<a href="#" class="btn btn-info btn-default">Select</a>
-	    								<a href="#" class="btn btn-danger btn-default"><i class="material-icons">add </i>Review</a>
-	    							</div>
-	    						</div>
-	    					</div>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i> -->
+						</a>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-md-12'>
+						<div class="card-content"></div>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-md-12'>
+						<h4 class="card-title">{{this.name}}</h4>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-md-12'>
+						<h6 class="category text-gray">{{this.category}}</h6>
+					</div>
+				</div>
+				<div class='row' style="height:80px">
+					<div class='col-md-12' text-center text-justify'>
+					{{this.channelDescription}}
+					</div>
+				</div>								
+				
+				
+
+				<a href=' + "localhost:8080/channels/"+{{this.id}}+' channel-id={{this.id}} class="btn btn-info btn-default">Select</a>
+				<a href="#" class="btn btn-danger btn-default"><i class="material-icons">add </i>Review</a>
+			</div>
+		</div>
+	

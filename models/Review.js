@@ -13,12 +13,11 @@ module.exports = function(sequelize, DataTypes)
         len:[20,1000]
         } 
       },
-    rating: 
+    rating:
         {
       type: DataTypes.INTEGER,
       allowNull: false
         }
-
 
   });
 
@@ -28,7 +27,8 @@ module.exports = function(sequelize, DataTypes)
   {
     foreignKey: 
       {
-        allowNull: false
+        allowNull: false,
+        unique: 'compositeIndex'
       }
   });
 
@@ -36,7 +36,8 @@ module.exports = function(sequelize, DataTypes)
   {
     foreignKey: 
       {
-        allowNull: false
+        allowNull: false,
+        unique: 'compositeIndex'
       }
   });
 };

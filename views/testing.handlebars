@@ -1,20 +1,66 @@
 <script>
-  var socket = io('http://localhost:8080');
-  socket.on("message-from-server",function(message){
+
+    var socket = io('http://localhost:8080');
+/*  socket.on("message-from-server",function(message){
     console.log(message);
+  });*/
+  socket.on("message-from-server-in-response-to-connection",function(message){
+    console.log("below is the response from the server in response to a connection request");
   });
-  socket.emit("message-from-client",{
-    greeting:'Hello from Client'
+
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1662728243761233',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  function statusChangeCallback(x){
+    if(x.status == "connected")
+      {
+        socket.emit("message-from-client-check-log-in-status",{
+          id : x.authResponse.userID,
+          ChannelId: $("#channelDiv").data("id")
+        });
+      }
+      else{
+        console.log("user is not qualified to see chat");
+      }
+
+  }
+  function checkLoginState (){
+
+  FB.getLoginStatus(function(response) 
+  {
+    statusChangeCallback(response);
   });
+}
+
+setTimeout(checkLoginState,500);
+
 </script>
 
+
+<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button> -->
 
 <label for="UserId">User Id</label>
 <input type="text" id="UserId">
 <label for="Channel">Channel id</label>
 <input type="text" id="ChannelId">
 <label for="testform">message</label>
-<textarea rows="3" id="testform"></textarea>	
+<textarea rows="3" id="testform"></textarea>  
 <label for="ratingId">rating(input 1 through 5</label>
 <input type="text" id="ratingId">
 <button type="submit" id="submit" >submit review</button>
@@ -58,12 +104,12 @@
 <label for="ReviewId">ReviewId</label>
 <input type="text" id="ReviewId">
 <label for="messageBody">messageBody</label>
-<textarea rows="3" id="messageBody"></textarea>	
+<textarea rows="3" id="messageBody"></textarea> 
 <button type="submit" id="submit6" >submit review</button>
 <br><br>
 
 <label for="channelName">channel Search on api</label>
-<input type="text" id="channelName">	
+<input type="text" id="channelName">  
 <button type="submit" id="submit7" >submit channel search on api</button>
 
 
@@ -88,106 +134,80 @@
 </form>
 <script>
 
-/*
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{your-app-id}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{latest-api-version}'
-    });
-    FB.AppEvents.logPageView();   
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
-
-
-FB.login()
-*/
-	
+  
 $("#submit").on("click",function(){
-	var messageBody = $("#testform").val();
-	var UserId = $("#UserId").val();
-	var ChannelId = $("#ChannelId").val();
+  var messageBody = $("#testform").val();
+  var UserId = $("#UserId").val();
+  var ChannelId = $("#ChannelId").val();
   var rating = $("#ratingId").val();
-	var review = {messageBody,UserId,ChannelId,rating};
-	console.log("review below");
-	console.log(review);
-	$.post("/api/reviewpost", review, function(post) {
-		console.log(post);
+  var review = {messageBody,UserId,ChannelId,rating};
+  console.log("review below");
+  console.log(review);
+  $.post("/api/reviewpost", review, function(post) {
+    console.log(post);
     });
 });
 $("#submit2").on("click",function(){
-	var username = $("#username").val();
-	var password = $("#password").val();
-	var email = $("#email").val(); 
-	var user = {username,password,email};
-	$.post("/api/userpost", user, function(post) {
-		console.log(post);
+  var username = $("#username").val();
+  var password = $("#password").val();
+  var email = $("#email").val(); 
+  var user = {username,password,email};
+  $.post("/api/userpost", user, function(post) {
+    console.log(post);
     });
 });
 $("#submit3").on("click",function(){
-	var name = $("#name").val();
-	var UserId = $("#UserIdForChannel").val();
+  var name = $("#name").val();
+  var UserId = $("#UserIdForChannel").val();
   var rating = $("#ChannelRating").val();
-	var channelDescription = $("#ChannelDescription").val();
+  var channelDescription = $("#ChannelDescription").val();
   var category = $("#ChannelCategory").val();
-	var Channel = {name,UserId,channelDescription,category};
-	$.post("/api/Channelpost", Channel, function(post) {
-		console.log(post);
+  var Channel = {name,UserId,channelDescription,category};
+  $.post("/api/Channelpost", Channel, function(post) {
+    console.log(post);
     });
 });
 
 $("#submit4").on("click",function(){
-	var limit = 12//someFunction that determines the limit;
-	var name = $("#nameOfChannelBeingSearched").val();
-	name += "?"+limit;
-	$.get("/api/getAllChannels/"+name, function(Channels) {
-		console.log(Channels);
+  var limit = 12//someFunction that determines the limit;
+  var name = $("#nameOfChannelBeingSearched").val();
+  name += "?"+limit;
+  $.get("/api/getAllChannels/"+name, function(Channels) {
+    console.log(Channels);
     });
 });
 
 $("#submit5").on("click",function(){
-	var id = $("#deleteInput").val();
-	$("#deleteInput").val('');
-	$.ajax({
+  var id = $("#deleteInput").val();
+  $("#deleteInput").val('');
+  $.ajax({
       method: "DELETE",
       url: "/api/Reviews/"+id
     })
     .done(function(Channels) 
-	{
-		console.log(Channels);
+  {
+    console.log(Channels);
     });
 });
 
 $("#submit6").on("click",function(){
-	var messageBody = $("#messageBody").val();
-	var id = $("#ReviewId").val();
-	var review = {messageBody,id};
-	$.ajax({
+  var messageBody = $("#messageBody").val();
+  var id = $("#ReviewId").val();
+  var review = {messageBody,id};
+  $.ajax({
       method: "PUT",
       url: "/api/Reviewupdate",
       data: review
     })
     .done(function(post) {
-		console.log(post);
+    console.log(post);
     });
 });
 
 $("#submit7").on("click",function(){
-	var channelName = $("#channelName").val();
-	$.get("/api/channelsearch/"+channelName, function(channels) {
-		console.log(channels);
+  var channelName = $("#channelName").val();
+  $.get("/api/channelsearch/"+channelName, function(channels) {
+    console.log(channels);
     });
 });
 
@@ -198,25 +218,5 @@ $("#submit8").on("click",function(){
     });
 });
 
-
-/*    $.ajax({
-      method: "PUT",
-      url: "/api/posts",
-      data: post
-    })
-    .done(function() {
-      window.location.href = "/blog";
-    });*/
-
-/*
-  function deletePost(id) {
-    $.ajax({
-      method: "DELETE",
-      url: "/api/posts/" + id
-    })
-    .done(function() {
-      getPosts(postCategorySelect.val());
-    });
-  }*/
 
 </script>

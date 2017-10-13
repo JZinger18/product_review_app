@@ -29,22 +29,6 @@ module.exports = function(sequelize, DataTypes)
 
   });
 
-  Channel.associate = function(models) {
-
-    Channel.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-
-    Channel.hasMany(models.Review, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-
-  };
-
   return Channel;
 
 };

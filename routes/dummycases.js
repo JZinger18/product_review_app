@@ -8,34 +8,42 @@
 
      db.User.create({
       username:"andrewwilliams",
+      fbId:"abc11abc23",
       email:"andrewjameswilliams.aw@gmail.com"
     })
      db.User.create({
       username:"testUser1",
+      fbId:"abc11abc24",
       email:"testuser1@gmail.com"
     });
      db.User.create({
       username:"testUser2",
+      fbId:"abc11abc25",
       email:"testuser2@gmail.com"
     });
      db.User.create({
       username:"testUser3",
+      fbId:"abc11abc26",
       email:"testuser3@gmail.com"
     });
      db.User.create({
       username:"testUser4",
+      fbId:"abc11abc27",
       email:"testuser4@gmail.com"
     });
      db.User.create({
       username:"testUser5",
+      fbId:"abc11abc28",
       email:"testuser5@gmail.com"
     });
      db.User.create({
       username:"testUser6",
+      fbId:"abc11abc29",
       email:"testuser6@gmail.com"
     });
      db.User.create({
       username:"testUser7",
+      fbId:"abc11abc30",
       email:"testuser7@gmail.com"
     });
       res.redirect("/testing");

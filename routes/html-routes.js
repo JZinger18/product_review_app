@@ -54,9 +54,13 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:d
   });*/
 
   app.get("/testing", function(req, res) {
+    console.log("req.user below");
+    console.log(req.user);
     res.render("testing");
   });
     app.get("/chatting", function(req, res) {
+    console.log("req.user below");
+    console.log(req.user);
     res.render("chatting");
   });
 

@@ -22,16 +22,10 @@ module.exports = function(app) {
 
   // GET route for getting all of the Reviews
 
-
-  app.post('/cookie',function(req, res){
-      var value = req.body.username;
-     res.cookie("name" , value).redirect("/public/index.html");
-});
-
-
   app.get("/api/getAllChannels", function(req, res) {
 
-    console.log(req.query);
+    console.log("below you will see the req.user object");
+    console.log(req.user);
 
     db.Channel.findAndCountAll({
       limit: 12,

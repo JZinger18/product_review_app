@@ -28,8 +28,8 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:d
       })
 
      db.Channel.count("id").then(function(amountOfRows){
-      console.log(channels);
-      res.render("dashboard",{channels,amountOfRows});
+/*      console.log(channels);
+*/      res.render("dashboard",{channels,amountOfRows});
      })
     });
   });

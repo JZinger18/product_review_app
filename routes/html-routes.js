@@ -24,7 +24,7 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:d
     .then(function(dbReview) {
      var channels = dbReview.map(function(x)
       {
-        return{name:x.name,category:x.category,channelDescription:x.channelDescription,ratingValue:`<i class="fa fa-star"></i>`.repeat(Math.round(x.amountOfStars)),thumbnail:x.thumbnail}
+        return{id:x.id,name:x.name,category:x.category,channelDescription:x.channelDescription,ratingValue:`<i class="fa fa-star"></i>`.repeat(Math.round(x.amountOfStars)),thumbnail:x.thumbnail}
       })
 
      db.Channel.count("id").then(function(amountOfRows){
@@ -62,6 +62,9 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:d
     console.log("req.user below");
     console.log(req.user);
     res.render("chatting");
+  });
+    app.get("/channels", function(req, res) {
+    res.render("channel_page");
   });
 
 };

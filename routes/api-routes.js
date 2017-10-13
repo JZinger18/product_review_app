@@ -20,7 +20,7 @@ module.exports = function(app) {
 
   // GET route for getting all of the Reviews
 
-  app.get("/api/getAllChannels", function(req, res) {
+  app.get("api/getAllChannels", function(req, res) {
 
     console.log("below you will see the req.user object");
     console.log(req.user);

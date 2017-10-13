@@ -17,7 +17,8 @@ module.exports = function(app) {
 
   app.get("/channelrendering", function(req, res) {
     var offset = req.query.amount? "OFFSET "+req.query.amount: "";
-    db.sequelize.query(`SELECT Channels.id as id,Channels.name as name ,count(Reviews.id) as amountOfReviews,avg(Reviews.rating)as amountOfStars, Channels.category as category,Channels.thumbnail as thumbnail,Channels.channelDescription as channelDescription
+    db.sequelize.query(`
+      SELECT Channels.id as id,Channels.name as name ,count(Reviews.id) as amountOfReviews,avg(Reviews.rating)as amountOfStars, Channels.category as category,Channels.thumbnail as thumbnail,Channels.channelDescription as channelDescription
 FROM Channels INNER JOIN Reviews ON Reviews.Channelid = Channels.id
 GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:db.sequelize.QueryTypes.SELECT})
     .then(function(dbReview) {
@@ -27,32 +28,39 @@ GROUP BY Channels.id ORDER BY count(Reviews.id) DESC LIMIT 12 ${offset}`,{type:d
       })
 
      db.Channel.count("id").then(function(amountOfRows){
+      console.log(channels);
       res.render("dashboard",{channels,amountOfRows});
      })
     });
   });
 
-/*  app.get("/", function(req, res) {
+
+/*
+  app.get("/", function(req, res) {
     db.Channel.findAndCountAll({
-      limit: 12,
+      limit: req.query.limit,
       offset: 0,
-      include:[{model:db.User,attributes:{exclude: ['createdAt']}},{model:db.Review,attributes:{exclude: ['createdAt']}}],
-      order: [ [ { model: db.Review, as: 'amountOfReviews' }, 'name', 'DESC' ] ]
+      where:{name:{
+        [Op.like]:"%"+req.params.name+"%"
+      }},
+        attributes: {
+         exclude: ['createdAt']  
+       },
+      include:[{model:db.User,attributes:{exclude: ['createdAt']}},{model:db.Review,attributes:{exclude: ['createdAt']}}]
   })
     .then(function(dbReview) {
-      var channels = dbReview.rows.map(function(x)
-      {
-        var amountOfStars = Math.round(x.Reviews.reduce(function(a,b){return a+Number(b.rating)},0)/x.Reviews.length);
-        return{name:x.name,category:x.category,channelDescription:x.channelDescription,ratingValue:`<i class="fa fa-star"></i>`.repeat(amountOfStars),thumbnail:x.thumbnail}
-      })
-      res.render("dashboard",{channels:channels});
+      res.json(dbReview);
     });
   });*/
 
   app.get("/testing", function(req, res) {
+    console.log("req.user below");
+    console.log(req.user);
     res.render("testing");
   });
     app.get("/chatting", function(req, res) {
+    console.log("req.user below");
+    console.log(req.user);
     res.render("chatting");
   });
 

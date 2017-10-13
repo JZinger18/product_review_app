@@ -1,20 +1,20 @@
-	<nav class="navbar navbar-info navbar-transparent navbar-fixed-top navbar-color-on-scroll">
-    	<div class="container">
-        	<!-- Brand and toggle get grouped for better mobile display -->
-        	<div class="navbar-header">
-        		<button type="button" class="navbar-toggle" data-toggle="collapse">
-            		<span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-        		</button>
-        		<a class="navbar-brand" href="index_SA.html"><img class="img" src="img/TubeReview_logo_light.png" style="height: 41px; width: 133px"/></a>
-        	</div>
+<nav class="navbar navbar-info navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+	<div class="container">
+    	<!-- Brand and toggle get grouped for better mobile display -->
+    	<div class="navbar-header">
+    		<button type="button" class="navbar-toggle" data-toggle="collapse">
+        		<span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+    		</button>
+    		<a class="navbar-brand" href="index_SA.html"><img class="img" src="img/TubeReview_logo_light.png" style="height: 41px; width: 133px"/></a>
+    	</div>
 
         	<div class="collapse navbar-collapse">
         		<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="login.html" target="_blank" class="btn btn-white btn-simple profile-photo">
+						<a href="/auth/facebook" class="btn btn-white btn-simple profile-photo">
 							<div class="profile-photo-small">
 	                            <img src="img/avatar.jpg" alt="Circle Image" class="img-circle img-responsive">Log in
 	                        </div><!-- <i class="material-icons">person</i> --> 
@@ -27,23 +27,24 @@
 
 
 	<div class="page-header header-filter" data-parallax="true" style="background-image: url('img/city.jpg');">
-				<div class="container">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
 					<div class="brand">
 								<div class="card card-raised card-form-horizontal">
 	        						<div class="card-content">
-	        							<form method="" action="" id="searchForm">
+	        							<form method="get" action="/api/getAllChannels" id="searchForm">
 	        								<div class="row">
 	        									<div class="col-sm-8">
 	        										<div class="input-group input-info">
 	        											<span class="input-group-addon">
 	        											</span>
-	        											<input type="text" value="" placeholder="Channel Search" class="form-control" id="channelSearch"/>
+	        											<input type="text" name="searchValue" placeholder="Channel Search" class="form-control" id="channelSearch"/>
 	        										</div>
 	        									</div>
 	        									<div class="col-sm-4">
-	        										<button  type="submit" class="btn btn-info btn-block"><i class="material-icons">search</i> Search</button>
+	        										  <button  type="submit" class="btn btn-info btn-block">
+	        										  	<i class="material-icons">search</i> Search</button>
 	        									</div>
 	        								</div>
 	        							</form>
@@ -98,11 +99,6 @@
                 	</div>
                 </div>
 
-
-                <div class="description text-center">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
-                </div>
-
 				<div class="space-70"></div>
 
 	    		<!--     *********   CARDS     *********      -->
@@ -115,10 +111,11 @@
 	        			</div></br>
 
 
-
+				
 					{{#each channels}}
 						{{> cards/card}}
 					{{/each}}
+
 					
 	    				</div>
 	    		</div>

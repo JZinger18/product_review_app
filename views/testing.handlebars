@@ -1,4 +1,39 @@
 <script>
+/*
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1662728243761233',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  function statusChangeCallback(x){
+    console.log(x);
+  }
+  function checkLoginState (){
+
+    FB.login(function(response) {
+  console.log(response);
+}, {scope: 'public_profile,email'});
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+  }
+ setTimeout(checkLoginState,5000);*/
+</script>
+
+<script>
   var socket = io('http://localhost:8080');
   socket.on("message-from-server",function(message){
     console.log(message);
@@ -6,8 +41,12 @@
   socket.emit("message-from-client",{
     greeting:'Hello from Client'
   });
+
+
 </script>
 
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
 
 <label for="UserId">User Id</label>
 <input type="text" id="UserId">

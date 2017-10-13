@@ -22,20 +22,16 @@ module.exports = function(app) {
 
   // GET route for getting all of the Reviews
 
+  app.get("/api/getAllChannels", function(req, res) {
 
-  app.post('/cookie',function(req, res){
-      var value = req.body.username;
-     res.cookie("name" , value).redirect("/public/index.html");
-});
-
-
-  app.get("/api/getAllChannels/:name", function(req, res) {
+    console.log("below you will see the req.user object");
+    console.log(req.user);
 
     db.Channel.findAndCountAll({
-      limit: req.query.limit,
+      limit: 12,
       offset: 0,
       where:{name:{
-        [Op.like]:"%"+req.params.name+"%"
+        [Op.like]:"%"+req.query.searchValue+"%"
       }},
         attributes: {
          exclude: ['createdAt']  
@@ -43,8 +39,16 @@ module.exports = function(app) {
       include:[{model:db.User,attributes:{exclude: ['createdAt']}},{model:db.Review,attributes:{exclude: ['createdAt']}}]
   })
     .then(function(dbReview) {
-      res.json(dbReview);
-    });
+
+       var channels = dbReview.rows.map(function(x){
+
+        var ratingValue = x.Reviews.reduce(function(a,b){
+            return a + b.rating
+          },0)/x.Reviews.length;
+                return{name:x.name,category:x.category,channelDescription:x.channelDescription,ratingValue:`<i class="fa fa-star"></i>`.repeat(Math.round(x.amountOfStars)),thumbnail:x.thumbnail}
+       });
+          res.render("dashboard",{channels,amountOfRows:dbReview.rows.length});
+        });
   });
 
     app.get("/api/getOneChannel/:name", function(req, res) {

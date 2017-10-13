@@ -13,20 +13,23 @@ module.exports = function(sequelize, DataTypes)
     foreignKey: 
       {
         allowNull: false,
-        unique: 'compositeIndex'
+        unique: true
       }
   });
 
   OnlineUser.belongsTo(models.User, 
   {
-    foreignKey: 
-      {
+    foreignKey:{
         allowNull: false,
-        unique: 'compositeIndex'
+        primaryKey:true
       }
+
   });
+
+ 
+
 };
 
-  return OnlineUser;
+ return OnlineUser;
 
-};
+}

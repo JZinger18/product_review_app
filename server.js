@@ -78,23 +78,48 @@ var users = [];
 
 
 io.on('connection',function(socket){
-	console.log('new connection has been made');
+  console.log('new connection has been made');
 
-	socket.emit('message-from-server',{greeting:'Hello from server',users:users});
+  socket.emit('message-from-server',{greeting:'Hello from server',users:users});
 
-	socket.on("message-from-client",function(message){
-		console.log(message);
-	});
-	socket.on("message-from-client-chat",function(message){
-		console.log(message);
-		if (!users.includes(message.user)){
-		users.push(message.user);
-		console.log("users is"+users);
-	}	
-		socket.emit("updateChat",{users});
-		socket.broadcast.emit("updateChat",{message,users:users});
-	});
-	
+  socket.on("message-from-client",function(message){
+    console.log(message);
+  });
+
+  socket.on("message-from-client-chat",function(message){
+    console.log(message);
+    if (!users.includes(message.user)){
+    users.push(message.user);
+    console.log("users is"+users);
+  } 
+    socket.emit("updateChat",{users});
+    socket.broadcast.emit("updateChat",{message,users:users});
+  });
+
+  socket.on("message-from-client-check-log-in-status",function(user){
+    db.User.findOne({where:{
+        fbId: user.id
+    }}).then(function(x){
+      console.log(x);
+      //have to create socket subscriptions dynamically and disconnect them as soon as the socket disconnects
+      socket.emit("message-from-server-in-response-to-connection",
+      {
+        
+      })
+        if(x)
+        {
+          db.OnlineUser.create({
+            UserFbid : user.id,
+            ChannelId:user.ChannelId
+          })
+        }
+    })
+
+
+  })
+
+  socket.removeAllListeners("message-from-client-chat");
+  
 })
 
 
@@ -115,8 +140,8 @@ app.get('/auth/facebook/callback',
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({force:true}).then(function() {
- 	server.listen(PORT, function() {
+db.sequelize.sync().then(function() {
+  server.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
 });

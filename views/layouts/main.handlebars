@@ -37,6 +37,12 @@
 	<script src="/js/material-kit.js?v=1.1.0" type="text/javascript"></script>
 	<script src="/js/nouislider.js" type="text/javascript"></script>
 </head>
+<script>
+          sessionStorage.clear();
+          var lastlocation =window.location.href;
+          sessionStorage.setItem("lastlocation", lastlocation);
+          console.log(lastlocation);
+  </script>
 
 <body>
 {{{body}}}

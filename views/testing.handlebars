@@ -27,12 +27,13 @@
     FB.AppEvents.logPageView();
   };
 
+
+
   function statusChangeCallback(x){
     if(x.status == "connected")
       {
         client.emit("message-from-client-check-log-in-status",{
           id : x.authResponse.userID,
-          ChannelId: 4
         });
       }
       else{

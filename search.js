@@ -78,10 +78,6 @@ io.on('connection', function(socket){
 /*And then simply use to or in (they are the same) when broadcasting or emitting:
 */
 io.to('some room').emit('some event');
-To leave a channel you call leave in the same fashion as join.
-
-##
-
  socket.removeAllListeners("message-from-client-chat");
   
 })

@@ -1,4 +1,3 @@
-
 var db = require("./models");
 var express = require("express");
 var app = express();
@@ -15,25 +14,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 var PORT = process.env.PORT || 8080;
 
-var cookieSession = require('cookie-session')
-var express = require('express')
-
-var app = express()
-
-app.set('trust proxy', 1) // trust first proxy
-
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2']
-}))
-
-app.get('/', function (req, res, next) {
-  // Update views
-  req.session.lastVisit = (req.session.views || 0) + 1
-
-  // Write response
-  res.end(req.session.views + ' views')
-})
 
 // Requiring our models for syncing
 // Sets up the Express app to handle data parsing
@@ -101,20 +81,18 @@ require("./routes/dummycases.js")(app);
 require("./routes/channel-routes.js")(app);
 require("./routes/testroute.js")(app);
 require("./routes/testcases.js")(app);
-
-/*require("./socketCalls.js")(io);
-*/
+require("./socketCalls.js")(io,app);
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/channelRendering' }),
+  passport.authenticate('facebook', { failureRedirect: '/channelrendering' }),
   function(req, res) {
     console.log("in callback to authentication route below");
     console.log(req.user);
-/*    db.OnlineUser.findOne({where:{UserfbId : req.user.fbId}})
-*/    res.redirect("/channelRendering")
+        console.log(req.session)
+         res.redirect("/reroute.html")
   });
 
 

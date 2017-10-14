@@ -1,124 +1,106 @@
-<!-- <div class ='row .row-eq-height'> -->
-	<div class='wrapper'>
-	<div class="col-md-4 ">
-		<div style ='height:400px' class="card card-profile">
-			<div class="card-avatar">
-				<a href="#">
-					<img class="img" src="{{this.thumbnail}}" />
-				</a>
-			</div>
-				<div class='row'>
-					<div class = 'col-md-12'>
-						<a href="#" class="btn btn-just-icon btn-warning btn-simple">
+<div class='wrapper'>
+  <div class="col-md-4 ">
+    <div style='height:400px' class="card card-profile">
+      <div class="card-avatar">
+        <a href="#">
+          <img class="img" src="{{this.thumbnail}}"/>
+        </a>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          <a href="#" class="btn btn-just-icon btn-warning btn-simple">
+            {{{this.ratingValue}}}
+          </a>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          <div class="card-content"></div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h4 class="card-title">{{this.name}}</h4>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h6 class="category text-gray">{{this.category}}</h6>
+        </div>
+      </div>
+      <div class='row' style="height:80px">
+        <div class='col-md-12' text-center text-justify
+        '>
+        {{this.channelDescription}}
+      </div>
+    </div>
 
-							{{{this.ratingValue}}}
-<!-- 	    									<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i> -->
-						</a>
-					</div>
-				</div>
-				<div class='row'>
-					<div class='col-md-12'>
-						<div class="card-content"></div>
-					</div>
-				</div>
-				<div class='row'>
-					<div class='col-md-12'>
-						<h4 class="card-title">{{this.name}}</h4>
-					</div>
-				</div>
-				<div class='row'>
-					<div class='col-md-12'>
-						<h6 class="category text-gray">{{this.category}}</h6>
-					</div>
-				</div>
-				<div class='row' style="height:80px">
-					<div class='col-md-12' text-center text-justify'>
-					{{this.channelDescription}}
-					</div>
-				</div>
-											
-				
-				
 
-				<a href='/channels/{{this.id}}' data-channel-id={{this.id}} class="btn btn-info btn-default"> Select
-				</a>
-				<button class="btn btn-primary" data-target='#{{this.id}}' data-toggle='modal'><i class="material-icons">add </i>Review 
-				</button>
-				</div>	
-			
-		</div>
-	</div>
+    <a href='/channels/{{this.id}}' data-channel-id={{this.id}} class="btn btn-info btn-default"> Select
+    </a>
+    <button class="btn btn-primary" data-target='#{{this.id}}' data-toggle='modal'><i class="material-icons">add </i>Review
+    </button>
+  </div>
 
-	<div class="modal" id="{{this.id}}" tabindex="10" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-login">
-		<div class="modal-content">
-			<div class="card  card-plain">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i> </button>
+</div>
+</div>
 
-	    						<div class="card card-profile">
-	    							<div class="card-avatar">
-	    								<a href="#">
-	    									<img class="img" src="{{this.thumbnail}}"/>
-	    								</a>
-	    							</div>
-	    								<a href="#" class="btn btn-just-icon btn-warning btn-simple">
-												{{{this.ratingValue}}}
-	    								</a>
-	    							<div class="card-content">
+<div class="modal" id="{{this.id}}" tabindex="10" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login">
+    <div class="modal-content">
+      <div class="card  card-plain">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                  class="material-icons">clear</i></button>
 
-	    								<h4 class="card-title">{{this.name}}</h4>
-	    							</div>
-	    						</div>
-				</div>
-				<div class="modal-body">
-					<form class="form" method="" action="">
-						<div class="card-content">
+          <div class="card card-profile">
+            <div class="card-avatar">
+              <a href="#">
+                <img class="img" src="{{this.thumbnail}}"/>
+              </a>
+            </div>
+            <a href="#" class="btn btn-just-icon btn-warning btn-simple">
+              {{{this.ratingValue}}}
+            </a>
+            <div class="card-content">
 
-							<div class="input-group">
+              <h4 class="card-title">{{this.name}}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <form class="form" method="" action="">
+            <div class="card-content">
+
+              <div class="input-group">
 								<span class="input-group-addon">
 									<i class="material-icons">subtitles</i>
 								</span>
-								<input type="text" class="form-control" placeholder="Review Title:">
-							</div>
+                <input type="text" class="form-control" placeholder="Review Title:">
+              </div>
 
-							<div class="input-group">
+              <div class="input-group">
 								<span class="input-group-addon">
 									<i class="material-icons">star_half</i>
 								</span>
-								<input type="number" class="form-control" placeholder="Channel Score: 1-5 Stars">
-							</div>
+                <input type="number" class="form-control" placeholder="Channel Score: 1-5 Stars">
+              </div>
 
-							<div class="input-group">
+              <div class="input-group">
 								<span class="input-group-addon">
 									<i class="material-icons">comment</i>
 								</span>
-								<textarea class="form-control" placeholder="Write some nice stuff..." rows="5"></textarea>
-							</div>
-						</div>
-					</form>
-				</div>
-					<div class="modal-footer text-center">
-						<a href="#" class="btn btn-danger btn-default close" data-dismiss='modal'><i class="material-icons">add </i>Submit</a>
-					</div>
-			</div>
-		</div>
-	</div>
+                <textarea class="form-control" placeholder="Write some nice stuff..." rows="5"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer text-center">
+          <a href="#" class="btn btn-danger btn-default close" data-dismiss='modal'><i class="material-icons">add </i>Submit</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-
-
-<!--  End of facebook LoginModal -->
-
-
-
-
-	<!--    Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc    -->
-
 
 	

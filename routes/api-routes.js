@@ -66,8 +66,7 @@ module.exports = function(app) {
     })
   });
 
-  // Get route for returning Reviews of a specific category
-/*  app.get("/api/Reviews/category/:category", function(req, res) {
+  app.get("/api/Reviews/category/:category", function(req, res) {
     db.Review.findAll({
       where: {
         category: req.params.category
@@ -76,16 +75,7 @@ module.exports = function(app) {
     .then(function(dbReview) {
       res.json(dbReview);
     });
-  });*/
-
-  // Get rotue for retrieving a single Review
-
-
-
-
-
-
-
+  });
 
 
 
@@ -118,7 +108,6 @@ module.exports = function(app) {
 
   });
 
-  // Review route for saving a new Review
 /*  app.post("/api/Reviews", function(req, res) {
     console.log(req.body);
     db.Review.create({

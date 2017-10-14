@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-// *****************************************************************************
-// Server.js - This file is the initial starting point for the Node/Express server.
-//
-// ******************************************************************************
-// *** Dependencies
-// =============================================================
-
 var db = require("./models");
 var express = require("express");
 var app = express();
@@ -20,9 +12,8 @@ var path = require("path");
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 
-// =============================================================
-
 var PORT = process.env.PORT || 8080;
+
 
 // Requiring our models for syncing
 // Sets up the Express app to handle data parsing
@@ -76,6 +67,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+
+
 // Static directory
 var users = [];
 
@@ -86,34 +81,24 @@ require("./routes/dummycases.js")(app);
 require("./routes/channel-routes.js")(app);
 require("./routes/testroute.js")(app);
 require("./routes/testcases.js")(app);
-
-/*require("./socketCalls.js")(io);
-*/
+require("./socketCalls.js")(io,app);
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-
   passport.authenticate('facebook', { failureRedirect: '/channelrendering' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/reroute.html');
-
-  passport.authenticate('facebook', { failureRedirect: '/channelRendering' }),
   function(req, res) {
     console.log("in callback to authentication route below");
     console.log(req.user);
-/*    db.OnlineUser.findOne({where:{UserfbId : req.user.fbId}})
-*/    res.redirect("/reroute.html")
-   }
-
+        console.log(req.session)
+         res.redirect("/reroute.html")
   });
 
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({force: true}).then(function() {
+db.sequelize.sync({force:true}).then(function() {
   server.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });

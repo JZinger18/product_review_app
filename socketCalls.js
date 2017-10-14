@@ -1,6 +1,8 @@
+
+
 module.exports = function(socket,user){
 
-socket.join(`${channelId}`);
+socket.join(`${user.channelId}`);
 
 		socket.on("chat",function(message)
 	{

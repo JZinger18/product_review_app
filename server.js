@@ -69,14 +69,14 @@ app.use(passport.session());
 // Static directory
 var users = [];
 
-require(__dirname+"./routes/api-routes.js")(app);
-require(__dirname+"./routes/html-routes.js")(app);
-require(__dirname+"./routes/dummycases.js")(app);
-require(__dirname+"./routes/channel-routes.js")(app);
-require(__dirname+"./routes/testroute.js")(app);
-require(__dirname+"./routes/testcases.js")(app);
-require(__dirname+"./routes/auth.js")(app);
-require(__dirname+"./routes/socket-route.js")(app,io);
+require("/routes/api-routes.js")(app);
+require("/routes/html-routes.js")(app);
+require("/routes/dummycases.js")(app);
+require("/routes/channel-routes.js")(app);
+require("/routes/testroute.js")(app);
+require("/routes/testcases.js")(app);
+require("/routes/auth.js")(app);
+require("/routes/socket-route.js")(app,io);
 
 
 /*require("./socketCalls.js")(io);

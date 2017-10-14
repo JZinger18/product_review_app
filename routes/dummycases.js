@@ -4,7 +4,7 @@
      module.exports = function(app)
      {
 
-      app.get("/adduserValues",function(req,res){
+      app.get("/",function(req,res){
 
      db.User.create({
       username:"andrewwilliams",

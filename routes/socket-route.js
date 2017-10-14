@@ -9,6 +9,7 @@ var Op = require('sequelize').Op;
 // Routes
 // =============================================================
 module.exports = function(app,io) {
+
 app.get("/connectToSocket/:channelId",function(req,res){
   let user = req.user;
   user.channelId = req.params.channelId;

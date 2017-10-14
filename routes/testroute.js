@@ -30,6 +30,7 @@ module.exports = function(app) {
      db.TestModel.count("id").then(function(amountOfRows){
   //    console.log(channels);
     res.render("dashboardtest",{channels,amountOfRows,position:req.query.amount});
+    
      })
     });
   });

@@ -81,7 +81,7 @@ require("./routes/dummycases.js")(app);
 require("./routes/channel-routes.js")(app);
 require("./routes/testroute.js")(app);
 require("./routes/testcases.js")(app);
-require("./socketCalls.js")(io,app);
+require("./routes/socket-route.js")(app,io);
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
@@ -98,7 +98,7 @@ app.get('/auth/facebook/callback',
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({force:true}).then(function() {
+db.sequelize.sync().then(function() {
   server.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });

@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "Cochito001",
+    "username": "s7a9sx8ycgw7yqln",
+    "password": "aebbozjfk8vfv386",
     "database": "review_app_db",
-    "host": "localhost",
+    "host": "uc13jynhmkss3nve.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {

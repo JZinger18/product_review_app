@@ -36,7 +36,7 @@ module.exports = function(sequelize, DataTypes)
   {
     foreignKey: 
       {
-        allowNull: false,
+        allowNull: true,
         unique: 'compositeIndex'
       }
   });
@@ -45,7 +45,7 @@ module.exports = function(sequelize, DataTypes)
   {
     foreignKey: 
       {
-        allowNull: false,
+        allowNull: true,
         unique: 'compositeIndex'
       }
   });

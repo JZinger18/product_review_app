@@ -116,29 +116,53 @@
           {{#each channels}}
             {{> cards/card}}
           {{/each}}
-        
-                    <div id ="Cardspage">
-                      <span>after this</span>
-                    </div>
+                 
+                  <div class="col-md-12">
+                   <!--<div id = "Cardpage text-center">-->
+                   <div class="center-block">
+                    <ul class="pagination pagination-info"></ul>
+                  </div>    
+                         <!--</div>-->
+                  </div>       
                <script>
 
-
-
-                         setTimeout(function(){
+                       setTimeout(function(){
                        var posi = Number({{position}});
                        console.log(posi);
                        if (posi == null){
                            posi = 1;
                        }
+
                        var values = GetPager(Number({{amountOfRows}}),posi,12);
+
                        console.log(values);
                        console.log(values.startPage);
                        console.log(values.endPage);
-                       for (var i = values.startPage;i <=values.endPage; i++) {
-                           let page = $("<span>");
-                            page.html(`<a href = "/channelrenderingtest?amount=${i}">${i}</a>`);
-                           $('#Cardspage').append(page);                                    
+                       console.log("Out startpage: "+values.startPage);
+                       var startpage = values.startPage;
+                       var prev = posi-1;
+                       var next = posi+1;
+
+                       let out = $('<li>');
+                        out.html(`<a href = "/channelrenderingtest?amount=${prev}">Prev</a>`);
+                        $('.pagination-info').append(out);
+                      
+                       for (var i = values.startPage; i <=values.endPage; i++) {
+                           if (i === posi){
+                            let page = $('<li>').addClass('active');
+                              page.html(`<a href = "/channelrenderingtest?amount=${i}">${i}</a>`);
+                             $('.pagination-info').append(page);
+
+                           }else{
+                           let page = $('<li>');
+                           page.html(`<a href = "/channelrenderingtest?amount=${i}">${i}</a>`);
+                           $('.pagination-info').append(page);
+                         }
                        };
+                       let out2 = $('<li>');
+                        out2.html(`<a href = "/channelrenderingtest?amount=${next}">Next</a>`);
+                        $('.pagination-info').append(out2);
+
     function GetPager( totalItems, currentPage, pageSize) {
     // default to first page
     currentPage = currentPage || 1;

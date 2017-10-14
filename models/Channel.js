@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes)
         type: DataTypes.STRING,
         allowNull: true,
       }
-  };
+  });
   Channel.associate = function(models){
 
     Channel.hasMany(models.Review, {

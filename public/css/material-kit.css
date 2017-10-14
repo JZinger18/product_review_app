@@ -8408,9 +8408,26 @@ select.selectpicker {
   }
 }
 
-#Cardspage {
-  display: inline-block;
+
+#Cardspage{
   margin: auto;
-  text-align: center;
-  size: 50px;
+  display: inline-block;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+span {
+    
+     padding: 15px 25px;
+     display: inline-block;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    color: red;
+    -moz-box-shadow: 0px 0px 2px #888;
+    -webkit-box-shadow: 0px 0px 2px #888;
+    box-shadow: 0px 0px 2px #888;
+    font-size: 50px;
+>>>>>>> master
 }

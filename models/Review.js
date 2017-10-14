@@ -30,26 +30,6 @@ module.exports = function(sequelize, DataTypes)
 
   });
 
-  Review.associate = function(models){
-
-  Review.belongsTo(models.Channel, 
-  {
-    foreignKey: 
-      {
-        allowNull: false,
-        unique: 'compositeIndex'
-      }
-  });
-
-  Review.belongsTo(models.User, 
-  {
-    foreignKey: 
-      {
-        allowNull: false,
-        unique: 'compositeIndex'
-      }
-  });
-};
 
   return Review;
 

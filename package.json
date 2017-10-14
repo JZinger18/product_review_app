@@ -1,39 +1,34 @@
 {
-  "name": "blog-crud",
+  "name": "product_review_app",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "review application for youtube channels",
+  "main": "npm install --server.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "mysql2": "^1.4.2",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "path": "^0.12.7",
+    "sequelize": "^4.13.15",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JZinger18/product_review_app.git"
+  },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "cookie-session": "^2.0.0-beta.3",
-    "dotenv": "^4.0.0",
-    "express": "^4.16.1",
-    "express-handlebars": "^3.0.0",
-    "express-session": "^1.15.6",
-    "google-auth-library": "^0.11.0",
-    "googleapis": "^22.2.0",
-    "handlebars-helper-repeat": "^1.0.0",
-    "mysql": "^2.15.0",
-    "mysql2": "^1.3.6",
-    "passport": "^0.4.0",
-    "passport-facebook": "^2.1.1",
-    "passport-local": "^1.0.0",
-    "path": "^0.12.7",
-    "sequelize": "^4.13.5",
-    "socket.io": "^2.0.3",
-    "util": "^0.10.3",
-    "youtube-node": "^1.3.2"
+  "bugs": {
+    "url": "https://github.com/JZinger18/product_review_app/issues"
   },
-  "devDependencies": {
-    "nodemon": "^1.12.1"
-  }
+  "homepage": "https://github.com/JZinger18/product_review_app#readme"
 }

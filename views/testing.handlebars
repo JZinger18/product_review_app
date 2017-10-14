@@ -1,6 +1,6 @@
 <script>
 
-    var client = io('/');
+  var socket = io(window.location.protocol+"//"+window.location.host);
 /*  client.on("message-from-server",function(message){
     console.log(message);
   });*/

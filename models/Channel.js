@@ -26,12 +26,13 @@ module.exports = function(sequelize, DataTypes)
       type: DataTypes.STRING,
       allowNull:false
       },
-      demoVideo : 
+     demoVideo : 
       {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       }
-  };
+  });
+
   Channel.associate = function(models){
 
     Channel.hasMany(models.Review, {

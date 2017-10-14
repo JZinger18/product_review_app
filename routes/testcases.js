@@ -1,4 +1,4 @@
-     var db = require("../models");
+     var db = require(__dirname+"../models");
 module.exports = function(app){
 
 app.get("/addtestValues",function(req,res){

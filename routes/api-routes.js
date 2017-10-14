@@ -6,7 +6,7 @@
 // =============================================================
 
 // Requiring our Todo model
-var db = require('../models');
+var db = require(__dirname +'../models');
 var Op = require('sequelize').Op;
 var YouTube = require('youtube-node');
 var wholeObject;

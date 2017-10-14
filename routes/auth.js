@@ -1,7 +1,7 @@
 // Dependencies
 // =============================================================
 var path = require("path");
-var db = require('../models');
+var db = require(__dirname+'../models');
 var Op = require('sequelize').Op;
 
 

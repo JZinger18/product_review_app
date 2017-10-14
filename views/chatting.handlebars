@@ -1,5 +1,5 @@
 <script>
-  var socket = io('http://localhost:8080');
+  var socket = io(window.location.protocol+"//"+window.location.host);
   
 socket.on("message-from-server",function(message){
   console.log(message);

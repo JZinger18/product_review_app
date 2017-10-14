@@ -1,8 +1,8 @@
 // Dependencies
 // =============================================================
 var path = require("path");
-var db = require('../models');
-var ioCallBack = require('../socketCalls.js');
+var db = require(__dirname+'../models');
+var ioCallBack = require(__dirname+'../socketCalls.js');
 var Op = require('sequelize').Op;
 
 

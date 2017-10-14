@@ -69,7 +69,6 @@ app.use(passport.session());
 // Static directory
 var users = [];
 
-require("./routes/socket-route.js")(app,io);
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 require("./routes/dummycases.js")(app);
@@ -77,6 +76,7 @@ require("./routes/channel-routes.js")(app);
 require("./routes/testroute.js")(app);
 require("./routes/testcases.js")(app);
 require("./routes/auth.js")(app);
+require("./routes/socket-route.js")(app,io);
 
 
 /*require("./socketCalls.js")(io);
@@ -97,9 +97,8 @@ app.get('/auth/facebook/callback',
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync().then(function() {
+db.sequelize.sync({force:true}).then(function() {
   server.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
-
   });
 });

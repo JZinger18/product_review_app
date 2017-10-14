@@ -14,9 +14,11 @@ var db        = {};
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+  var sequelize = new Sequelize('mysql://qfcbpj3an76mt1rc:ph8m2kt4cqzeslg1@uc13jynhmkss3nve.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/vi9nzb0uugyggoyk')
 
+
+}
+          uc13jynhmkss3nve.cbetxkdyhwsb.us-east-1.rds.amazonaws.com 
 fs
   .readdirSync(__dirname)
   .filter(function(file) {

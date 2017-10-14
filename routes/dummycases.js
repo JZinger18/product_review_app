@@ -1,4 +1,4 @@
-     var db = require(__dirname+"../models");
+     var db = require("../models");
 
 
      module.exports = function(app)

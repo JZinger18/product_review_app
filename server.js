@@ -85,6 +85,8 @@ require("./routes/dummycases.js")(app);
 require("./routes/channel-routes.js")(app);
 require("./routes/testroute.js")(app);
 require("./routes/testcases.js")(app);
+require("./routes/auth.js")(app);
+
 
 /*require("./socketCalls.js")(io);
 */
@@ -101,13 +103,14 @@ app.get('/auth/facebook/callback',
 
   passport.authenticate('facebook', { failureRedirect: '/channelRendering' }),
   function(req, res) {
-    console.log("in callback to authentication route below");
+    console.log("in callback to authentication route below CONFIRM");
     console.log(req.user);
 /*    db.OnlineUser.findOne({where:{UserfbId : req.user.fbId}})
+<<<<<<< HEAD
 */    res.redirect("/reroute.html")
    }
 
-  });
+ });
 
 
 // Syncing our sequelize models and then starting our Express app
@@ -115,5 +118,6 @@ app.get('/auth/facebook/callback',
 db.sequelize.sync().then(function() {
   server.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
+
   });
 });

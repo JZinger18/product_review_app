@@ -1,4 +1,4 @@
-var db = require("/product_review_app/models");
+var db = require("./product_review_app/models");
 var express = require("express");
 var app = express();
 var session = require("express-session");

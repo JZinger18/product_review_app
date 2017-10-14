@@ -1,23 +1,7 @@
-// {
-//   "development": {
-//     "username": "ntukdizpo6cw9dlz",
-//     "password": "geiszy3o3tp41pbx",
-//     "database": "zid1zxvexkitkm1p",
-//     "host": "ffn96u87j5ogvehy.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-//     "dialect": "mysql2",
-//     "use_env_variable": "JAWSDB_URL"
-//   },
-//   "test": {
-//     "username": "root",
-//     "password": null,
-//     "database": "database_test",
-//     "host": "127.0.0.1",
-//     "dialect": "mysql2"
- {
+{
   "production": {
     "use_env_variable": "JAWSDB_URL",
-      "dialect": "mysql"
-
+    "dialect": "mysql"
   }
 }
 

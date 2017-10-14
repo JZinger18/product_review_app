@@ -1,29 +1,30 @@
-<nav class="navbar navbar-info navbar-transparent navbar-fixed-top navbar-color-on-scroll">
-	<div class="container">
-    	<!-- Brand and toggle get grouped for better mobile display -->
-    	<div class="navbar-header">
-    		<button type="button" class="navbar-toggle" data-toggle="collapse">
-        		<span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-    		</button>
-    		<a class="navbar-brand" href="index_SA.html"><img class="img" src="img/TubeReview_logo_light.png" style="height: 41px; width: 133px"/></a>
-    	</div>
 
-        	<div class="collapse navbar-collapse">
-        		<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="/auth/facebook" class="btn btn-white btn-simple profile-photo">
-							<div class="profile-photo-small">
-	                            <img src="img/avatar.jpg" alt="Circle Image" class="img-circle img-responsive">Log in
-	                        </div><!-- <i class="material-icons">person</i> --> 
-						</a>
-					</li>
-        		</ul>
-        	</div>
-    	</div>
-    </nav>
+    <script>
+
+/*  function statusChangeCallback(response){
+  	if(!response){return}
+  	if(response.status == "connected"){
+  		console.log("connected")
+  	}else{
+  		
+  	}
+
+  }
+
+   function checkLoginState (){
+
+ FB.getLoginStatus(function(response) 
+  {
+  	  	if(!response){return}
+    statusChangeCallback(response);
+  });
+}
+
+setTimeout(()=>{
+checkLoginState()
+},300);*/
+
+    </script>
 
 
 	<div class="page-header header-filter" data-parallax="true" style="background-image: url('img/city.jpg');">
@@ -115,7 +116,114 @@
 					{{#each channels}}
 						{{> cards/card}}
 					{{/each}}
+			
+			        <div class='row'>
+                  <div class="col-md-12 text-center">
+                  
 
+                    <ul class="pagination pagination-info"></ul>
+                  </div>    
+                         <!--</div>-->
+                  </div>       
+               <script>
+
+                       setTimeout(function(){
+                       var posi = Number({{position}});
+                       console.log(posi);
+                       if (posi == null){
+                           posi = 1;
+                       }
+
+                       var values = GetPager(Number({{amountOfRows}}),posi,12);
+
+                       console.log(values);
+                       console.log(values.startPage);
+                       console.log(values.endPage);
+                       console.log("Out startpage: "+values.startPage);
+                       var startpage = values.startPage;
+                       var prev = posi-1;
+                       var next = posi+1;
+
+                       let out = $('<li>');
+                        out.html(`<a href = "/channelrenderingtest?amount=${prev}">Prev</a>`);
+                        $('.pagination-info').append(out);
+                      
+                       for (var i = values.startPage; i <=values.endPage; i++) {
+                           if (i === posi){
+                            let page = $('<li>').addClass('active');
+                              page.html(`<a href = "/channelrenderingtest?amount=${i}">${i}</a>`);
+                             $('.pagination-info').append(page);
+
+                           }else{
+                           let page = $('<li>');
+                           page.html(`<a href = "/channelrenderingtest?amount=${i}">${i}</a>`);
+                           $('.pagination-info').append(page);
+                         }
+                       };
+                       let out2 = $('<li>');
+                        out2.html(`<a href = "/channelrenderingtest?amount=${next}">Next</a>`);
+                        $('.pagination-info').append(out2);
+
+    function GetPager( totalItems, currentPage, pageSize) {
+    // default to first page
+    currentPage = currentPage || 1;
+    pageSize = pageSize || 10;
+    // calculate total pages
+    var totalPages = Math.ceil(totalItems / pageSize);
+    var startPage, endPage;
+    if (totalPages <= 10) {
+        // less than 10 total pages so show all
+        startPage = 1;
+        endPage = totalPages;
+    } else {
+        // more than 10 total pages so calculate start and end pages
+        if (currentPage <= 6) {
+            startPage = 1;
+            endPage = 10;
+        } else if (currentPage + 4 >= totalPages) {
+            startPage = totalPages - 9;
+            endPage = totalPages;
+        } else {
+            startPage = currentPage - 5;
+            endPage = currentPage + 4;
+        }
+    }
+    // calculate start and end item indexes
+    var startIndex = (currentPage - 1) * pageSize;
+    var endIndex = startIndex + pageSize;
+    // create an array of pages to ng-repeat in the pager control
+    var pages = range(startPage, endPage + 1);
+    // return object with all pager properties required by the view
+    return {
+        totalItems: totalItems,
+        currentPage: currentPage,
+        pageSize: pageSize,
+        totalPages: totalPages,
+        startPage: startPage,
+        endPage: endPage,
+        startIndex: startIndex,
+        endIndex: endIndex,
+        pages: pages
+    };
+}
+   function range(s, e, str){
+  // create generator that handles numbers & strings.
+  function *gen(s, e, str){
+    while(s <= e){
+      yield (!str) ? s : str[s]
+      s++
+    }
+  }
+  if (typeof s === 'string' && !str)
+    str = 'abcdefghijklmnopqrstuvwxyz'
+  const from = (!str) ? s : str.indexOf(s)
+  const to = (!str) ? e : str.indexOf(e)
+  // use the generator and return.
+  return [...gen(from, to, str)]
+}
+
+},100);                   
+                        </script>
 					
 	    				</div>
 	    		</div>

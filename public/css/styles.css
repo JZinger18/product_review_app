@@ -1,3 +1,8 @@
 button.submit {
   float: right;
 }
+
+
+.modal-backdrop {
+	z-index: 0 !important;
+}

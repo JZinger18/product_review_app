@@ -18,7 +18,6 @@ if (config.use_env_variable) {
 
 
 }
-          uc13jynhmkss3nve.cbetxkdyhwsb.us-east-1.rds.amazonaws.com 
 fs
   .readdirSync(__dirname)
   .filter(function(file) {

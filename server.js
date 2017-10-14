@@ -189,14 +189,14 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/channelrendering' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/channelrendering');
+    res.redirect('/reroute.html');
 
   passport.authenticate('facebook', { failureRedirect: '/channelRendering' }),
   function(req, res) {
     console.log("in callback to authentication route below");
     console.log(req.user);
 /*    db.OnlineUser.findOne({where:{UserfbId : req.user.fbId}})
-*/    res.redirect("/channelRendering")
+*/    res.redirect("/reroute.html")
    }
 
   });

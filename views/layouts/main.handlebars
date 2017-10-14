@@ -24,6 +24,14 @@
 </head>
 <
 <body class="profile-page">
+  <script>
+          sessionStorage.clear();
+          var lastlocation =window.location.href;
+          sessionStorage.setItem("lastlocation", lastlocation);
+          console.log(lastlocation);
+  </script>
+          
+
 
        {{{body}}}
    

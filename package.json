@@ -2,7 +2,7 @@
   "name": "product_review_app",
   "version": "1.0.0",
   "description": "review application for youtube channels",
-  "main": "npm start",
+  "main": "node server.js",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
